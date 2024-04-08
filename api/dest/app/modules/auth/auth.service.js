@@ -47,7 +47,7 @@ const loginUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 const registerUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, fullname, phone, password, biography } = user;
+    const { email, fullname, phone, password, biography, specializationIds } = user;
     try {
         // Check if the user with the provided email already exists
         // const existingUser = await prisma.Doctor.findOne({ where: { email } });
@@ -55,10 +55,34 @@ const registerUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
         //     return { error: 'Email already exists' };
         // }
         const hashedPassword = bcrypt_1.default.hashSync(password, bcryptSalt);
-        const newUser = yield prisma_1.default.Doctor.create({
-            data: { email, fullname, phone, password: hashedPassword, biography },
+        const newUser = yield prisma_1.default.doctor.create({
+            data: {
+                email,
+                fullname,
+                phone,
+                password: hashedPassword,
+                biography,
+                specializationIDs: specializationIds,
+            },
         });
-        return { fullname, email, phone, biography };
+        // Update the relevant specialization(s)
+        const updates = yield Promise.all(specializationIds.map((specializationId) => __awaiter(void 0, void 0, void 0, function* () {
+            const specialization = yield prisma_1.default.specialization.findUnique({
+                where: { id: specializationId },
+            });
+            if (!specialization) {
+                console.error(`Specialization with ID ${specializationId} not found`);
+                return { error: `Specialization with ID ${specializationId} not found` };
+            }
+            const updatedDoctorIDs = [...specialization.doctorIDs, newUser.id]; // Assuming doctorIDs is a String[]
+            return yield prisma_1.default.specialization.update({
+                where: { id: specializationId },
+                data: {
+                    doctorIDs: { set: updatedDoctorIDs },
+                },
+            });
+        })));
+        return { fullname, email, phone, biography, specializationIds };
     }
     catch (error) {
         console.error('Error registering user:', error);

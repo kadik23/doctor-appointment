@@ -8,31 +8,26 @@ datasource db {
 }
 
 model Doctor {
-  id            String          @id @default(auto()) @map("_id") @db.ObjectId
-  email         String          @unique
-  password      String 
-  fullname      String?
-  phone         String?
-  biography     String?
-  rating        Int?
-  imageProfile  String?
+  id      String     @id @default(auto()) @map("_id") @db.ObjectId
+  email     String     @unique
+  password   String 
+  fullname   String?
+  phone     String?
+  biography   String?
+  rating    Int?
+  imageProfile String?
+  specializationIDs String[]   @db.ObjectId
+  specializations Specialization[] @relation(fields: [specializationIDs], references: [id])
   @@map("doctors")
 }
 
 model Specialization {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
-  name         String
-  description  String
-  doctors      DoctorSpecialization[]  // Define intermediate model for many-to-many relationship
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  name     String  @unique
+  description String
+  doctorIDs String[]  @db.ObjectId
+  doctors Doctor[] @relation(fields: [doctorIDs], references: [id])
   @@map("specializations")
 }
 
-model DoctorSpecialization {
-  doctor       Doctor    @relation(fields: [doctorId], references: [id])
-  specialization Specialization @relation(fields: [specializationId], references: [id])
 
-  doctorId       String
-  specializationId String
-
-  @@id([doctorId, specializationId])
-}

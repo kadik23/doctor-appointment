@@ -12,6 +12,7 @@ type RegisterResponse = {
     email?: string;
     phone?:number;
     biography?:string;
+    specializationIds?: string[]
     error?: string | null
 }
 
@@ -46,7 +47,7 @@ const loginUser = async(user: any): Promise<LoginResponse> => {
 }
 
 const registerUser = async (user: any): Promise<RegisterResponse> => {
-    const { email, fullname, phone, password, biography } = user;
+    const { email, fullname, phone, password, biography, specializationIds } = user;
 
     try {
         // Check if the user with the provided email already exists
@@ -57,11 +58,36 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
 
         const hashedPassword = bcrypt.hashSync(password, bcryptSalt);
 
-        const newUser = await prisma.Doctor.create({
-            data: { email, fullname, phone, password: hashedPassword, biography },
+        const newUser = await prisma.doctor.create({
+            data: { 
+                email,
+                fullname,
+                phone,
+                password: hashedPassword,
+                biography,
+                specializationIDs: specializationIds,
+            },
         });
-
-        return { fullname, email, phone, biography };
+        // Update the relevant specialization(s)
+        const updates = await Promise.all(
+        specializationIds.map(async (specializationId: string | null) => {
+            const specialization = await prisma.specialization.findUnique({
+            where: { id: specializationId },
+            });
+            if (!specialization) {
+            console.error(`Specialization with ID ${specializationId} not found`);
+            return {error:`Specialization with ID ${specializationId} not found`};
+            }
+            const updatedDoctorIDs = [...specialization.doctorIDs, newUser.id]; // Assuming doctorIDs is a String[]
+            return await prisma.specialization.update({
+            where: { id: specializationId },
+            data: {
+                doctorIDs: { set: updatedDoctorIDs }, 
+            },
+            });
+        })
+        );
+        return { fullname, email, phone, biography, specializationIds };
     } catch (error) {
         console.error('Error registering user:', error);
         return { error: 'An error occurred during registration' };

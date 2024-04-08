@@ -9,29 +9,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AuthController = void 0;
-const auth_service_1 = require("./auth.service");
-const Login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield auth_service_1.AuthService.loginUser(req.body);
-    const { accessToken, error } = result;
-    if (accessToken) {
-        res.cookie('token', accessToken, { maxAge: 3600 * 3600, sameSite: 'none', path: '*', secure: true }).json({ userID: result.user });
-    }
-    else {
-        res.status(422).json(error);
-    }
-});
-const Register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield auth_service_1.AuthService.registerUser(req.body);
-    if (result.error) {
+exports.SpecializationController = void 0;
+const specialization_service_1 = require("./specialization.service");
+const getAllSpecialization = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield specialization_service_1.SpecializationService.getAllspecializations();
+    if ('error' in result) {
         res.status(500).json({ error: result.error });
     }
     else {
-        const { fullname, email, phone, biography, specializationIds } = result;
-        res.json({ fullname, email, phone, biography, specializationIds });
+        res.json(result);
     }
 });
-exports.AuthController = {
-    Login,
-    Register,
+const getSpecialization = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const SpecializationID = req.params._id;
+    const result = yield specialization_service_1.SpecializationService.getOnespecialization(SpecializationID);
+    if ('error' in result) {
+        res.status(500).json({ error: result.error });
+    }
+    else {
+        res.json(result);
+    }
+});
+exports.SpecializationController = {
+    getAllSpecialization,
+    getSpecialization
 };

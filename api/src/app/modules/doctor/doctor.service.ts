@@ -67,7 +67,7 @@ const deleteDoctor = async (id: string): Promise<any> => {
         })
         return result;
     } catch (e) {
-        console.error('Error deletngi doctor:', e);
+        console.error('Error deleting doctor:', e);
         return { error: e as string}
     }
 }

@@ -78,7 +78,7 @@ const deleteDoctor = (id) => __awaiter(void 0, void 0, void 0, function* () {
         return result;
     }
     catch (e) {
-        console.error('Error deletngi doctor:', e);
+        console.error('Error deleting doctor:', e);
         return { error: e };
     }
 });

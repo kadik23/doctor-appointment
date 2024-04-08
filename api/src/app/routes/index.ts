@@ -2,7 +2,7 @@ import express from 'express';
 import {AuthRouter} from '../modules/auth/auth.route'
 import { DoctorRouter } from '../modules/doctor/doctor.route';
 import { SpecializationRouter } from '../modules/specialization/specialization.route';
-// import {AppointmentsnRouter} from '../modules/patient/patient.route'
+import { AppointmentRouter } from '../modules/appointment/appointment.route';
 // import {SchedulesRouter} from '../modules/schedules/schedules.route'
 const router = express.Router();
 const moduleRoutes = [
@@ -18,12 +18,12 @@ const moduleRoutes = [
         path: '/specializations',
         route: SpecializationRouter,
     },
+    {
+        path: '/appointments',
+        route: AppointmentRouter,
+    },
     // {
-    //     path: '/api/appointments',
-    //     route: AppointmentsnRouter,
-    // },
-    // {
-    //     path: '/api/schedules/:id',
+    //     path: '/schedules/:id',
     //     route: SchedulesRouter
     // },
 ]

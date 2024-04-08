@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const auth_route_1 = require("../modules/auth/auth.route");
 const doctor_route_1 = require("../modules/doctor/doctor.route");
 const specialization_route_1 = require("../modules/specialization/specialization.route");
-// import {AppointmentsnRouter} from '../modules/patient/patient.route'
+const appointment_route_1 = require("../modules/appointment/appointment.route");
 // import {SchedulesRouter} from '../modules/schedules/schedules.route'
 const router = express_1.default.Router();
 const moduleRoutes = [
@@ -23,12 +23,12 @@ const moduleRoutes = [
         path: '/specializations',
         route: specialization_route_1.SpecializationRouter,
     },
+    {
+        path: '/appointments',
+        route: appointment_route_1.AppointmentRouter,
+    },
     // {
-    //     path: '/api/appointments',
-    //     route: AppointmentsnRouter,
-    // },
-    // {
-    //     path: '/api/schedules/:id',
+    //     path: '/schedules/:id',
     //     route: SchedulesRouter
     // },
 ];

@@ -18,6 +18,7 @@ model Doctor {
   imageProfile String?
   specializationIDs String[]   @db.ObjectId
   specializations Specialization[] @relation(fields: [specializationIDs], references: [id])
+  appointments Appointment[]
   @@map("doctors")
 }
 
@@ -30,4 +31,27 @@ model Specialization {
   @@map("specializations")
 }
 
+model Patient {
+  id  String  @id @default(auto()) @map("_id") @db.ObjectId
+  fullname  String
+  gender  String
+  age  String?
+  phone  String
+  appointments Appointment[]
+  @@map("patients")
+}
+
+
+model Appointment {
+  id  String  @id @default(auto()) @map("_id") @db.ObjectId
+  patient_id  String 
+  doctor_id String 
+  date  String
+  time  String
+  number  String
+  status   String @default("UNDONEStatus")
+  doctor   Doctor @relation(fields: [doctor_id], references: [id])
+  patient   Patient @relation(fields: [patient_id], references: [id])
+  @@map("appointments")
+}
 

@@ -1,8 +1,5 @@
-
-
 generator client {
   provider = "prisma-client-js"
-  previewFeatures = ["mongodb"]
 }
 
 datasource db {
@@ -11,29 +8,31 @@ datasource db {
 }
 
 model Doctor {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  email     String  @unique
-  password  String 
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  email         String          @unique
+  password      String 
   fullname      String?
-  phone      String?
-  biography String?
-  rating Int?
-  imageProfile String?
+  phone         String?
+  biography     String?
+  rating        Int?
+  imageProfile  String?
   @@map("doctors")
 }
 
-enum Day {
-  saturday
-  sunday
-  monday
-  tuesday
-  wednesday
-  thursday
-  friday
+model Specialization {
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  description  String
+  doctors      DoctorSpecialization[]  // Define intermediate model for many-to-many relationship
+  @@map("specializations")
 }
 
-enum Gender {
-  male
-  female
-}
+model DoctorSpecialization {
+  doctor       Doctor    @relation(fields: [doctorId], references: [id])
+  specialization Specialization @relation(fields: [specializationId], references: [id])
 
+  doctorId       String
+  specializationId String
+
+  @@id([doctorId, specializationId])
+}

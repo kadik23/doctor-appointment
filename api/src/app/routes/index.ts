@@ -1,14 +1,14 @@
 import express from 'express';
 import {AuthRouter} from '../modules/auth/auth.route'
-// import {DoctorRouter} from '../modules/doctors/doctors.route'
+import { DoctorRouter } from '../modules/doctor/doctor.route';
 // import {AppointmentsnRouter} from '../modules/patient/patient.route'
 // import {SchedulesRouter} from '../modules/schedules/schedules.route'
 const router = express.Router();
 const moduleRoutes = [
-    // {
-    //     path: '/api/doctors',
-    //     route: DoctorRouter,
-    // },
+    {
+        path: '/doctors',
+        route: DoctorRouter,
+    },
     {
         path: '/auth',
         route: AuthRouter,

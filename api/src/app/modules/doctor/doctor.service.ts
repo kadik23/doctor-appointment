@@ -34,6 +34,7 @@ const getAllDoctors = async (filters: DoctorFiltersData, options: DoctorOptions)
             email: doctor.email,
             fullname: doctor.fullname,
             phone: doctor.phone,
+            gender: doctor.gender,
             biography: doctor.biography,
         }));
 

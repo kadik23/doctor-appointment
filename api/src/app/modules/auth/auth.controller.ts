@@ -18,8 +18,8 @@ const Register = async (req: Request,res: Response)=>{
     if (result.error) {
         res.status(500).json({ error: result.error });
     } else {
-        const { fullname, email, phone, biography,specializationIds } = result;
-        res.json({ fullname, email, phone, biography, specializationIds });
+        const { fullname, email, phone, gender, biography,specializationIds } = result;
+        res.json({ fullname, email, phone, gender, biography, specializationIds });
     }
 }
 

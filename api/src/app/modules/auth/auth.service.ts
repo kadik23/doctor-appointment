@@ -1,20 +1,8 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import prisma from "../../../shared/prisma";
+import { LoginResponse, RegisterResponse } from "./auth.interface";
 
-type LoginResponse = {
-    accessToken?: string | null;
-    user?: {};
-    error?: string | null ;
-}
-type RegisterResponse = {
-    fullname?: string;
-    email?: string;
-    phone?:number;
-    biography?:string;
-    specializationIds?: string[]
-    error?: string | null
-}
 
 const jwtSecret = 'sdjjfldwjn2vpbcwytp'
 const bcryptSalt = bcrypt.genSaltSync(10);
@@ -47,7 +35,7 @@ const loginUser = async(user: any): Promise<LoginResponse> => {
 }
 
 const registerUser = async (user: any): Promise<RegisterResponse> => {
-    const { email, fullname, phone, password, biography, specializationIds } = user;
+    const { email, fullname, phone, gender, password, biography, specializationIds } = user;
 
     try {
         // Check if the user with the provided email already exists
@@ -63,12 +51,13 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
                 email,
                 fullname,
                 phone,
+                gender,
                 password: hashedPassword,
                 biography,
                 specializationIDs: specializationIds,
             },
         });
-        // Update the relevant specialization(s)
+        // Update the relevant specializations
         const updates = await Promise.all(
         specializationIds.map(async (specializationId: string | null) => {
             const specialization = await prisma.specialization.findUnique({
@@ -87,7 +76,7 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
             });
         })
         );
-        return { fullname, email, phone, biography, specializationIds };
+        return { fullname, email, phone, gender, biography,  specializationIds };
     } catch (error) {
         console.error('Error registering user:', error);
         return { error: 'An error occurred during registration' };

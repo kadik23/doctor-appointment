@@ -4,6 +4,7 @@ export type DoctorDoc = {
     fullname?: string;
     password?: string;
     phone?: string;
+    gender?: string;
     biography?: string;
     rating?: string;
     image_profile?: string;

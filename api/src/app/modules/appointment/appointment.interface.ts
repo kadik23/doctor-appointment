@@ -1,3 +1,5 @@
+import { Gender } from "../../../enums"
+
 export interface patientReq {
     fullname?: string
     gender?: Gender
@@ -24,7 +26,3 @@ export enum statusEnum  {
     'DONEStatus'
 }
 
-export enum Gender {
-    'male',
-    'female'
-}

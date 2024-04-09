@@ -14,11 +14,13 @@ model Doctor {
   fullname   String?
   phone     String?
   biography   String?
+  gender String?
   rating    Int?
   imageProfile String?
   specializationIDs String[]   @db.ObjectId
   specializations Specialization[] @relation(fields: [specializationIDs], references: [id])
   appointments Appointment[]
+  schedule Schedule[]
   @@map("doctors")
 }
 
@@ -54,4 +56,23 @@ model Appointment {
   patient   Patient @relation(fields: [patient_id], references: [id])
   @@map("appointments")
 }
+
+model Schedule {
+  id String  @id @default(auto()) @map("_id") @db.ObjectId
+  doctor_id String
+  date  String
+  day String?
+  start_time  String
+  end_time  String
+  doctor Doctor @relation(fields: [doctor_id], references: [id])
+  available_slots Available_slots[]
+  is_available_day String @default("true")
+  @@map("schedules")
+}
+
+type Available_slots{
+    start_at String
+    end_at String
+}
+
 

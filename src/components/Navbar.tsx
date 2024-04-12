@@ -9,8 +9,8 @@ function Navbar() {
                 <span className='text-regal-green font-semibold'>Docapp</span>
             </NavLink>
             <div className='flex gap-5 items-center'>
-                <NavLink to='/' className='transition-all duration-300  text-black hover:text-regal-green'>Home</NavLink> 
-                <NavLink to='/' className='transition-all duration-300 opacity-50 hover:text-regal-green hover:opacity-100  '>Our Doctors</NavLink> 
+                <NavLink to='/home' className='transition-all duration-300  text-black hover:text-regal-green'>Home</NavLink> 
+                <NavLink to='/our_doctors' className='transition-all duration-300 opacity-50 hover:text-regal-green hover:opacity-100  '>Our Doctors</NavLink> 
                 <NavLink to='/' className='transition-all duration-300 opacity-50 hover:text-regal-green hover:opacity-100'>Contact us</NavLink> 
             </div>
             <div className='flex items-center mr-20 gap-3 font-meduim'>

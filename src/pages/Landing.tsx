@@ -17,7 +17,7 @@ function Landing() {
           <p>Select preferred doctor and time slot to book appointment</p>
         </div>
         <div className='flex items-center gap-10'>
-          <button className='text-white bg-regal-green  py-1.5 px-5 rounded-2xl hover:bg-opacity-80 active:scale-105 transition-all duration-200'>Book An Appointment</button>
+          <NavLink to='/booking' className='text-white bg-regal-green  py-1.5 px-5 rounded-2xl hover:bg-opacity-80 active:scale-105 transition-all duration-200'>Book An Appointment</NavLink>
           <a href='#howSection' className='relative border-regal-green rounded-full flex items-center justify-center p-3 border-2 cursor-pointer' >
               <span  className='font-semibold text-sm absolute bottom-3  bg-white rounded-lg py-0.5 left-10 text-nowrap'>How it works ?</span>
             <Icon icon="ph:play-fill" width="18" height="18" className='text-regal-green '/>
@@ -90,7 +90,7 @@ function Landing() {
               <span className='font-semibold'>Appointment Is Quick And Easy</span>
             </div>
           </div>
-          <button className='text-white bg-regal-green  py-1.5 px-5 rounded-2xl hover:bg-opacity-80 active:scale-105 transition-all duration-200'>Book Now</button>
+          <NavLink to='/booking' className='text-white bg-regal-green  py-1.5 px-5 rounded-2xl hover:bg-opacity-80 active:scale-105 transition-all duration-200'>Book Now</NavLink>
         </div>
       </div>
     </div>
@@ -143,7 +143,7 @@ function Landing() {
                 </div>
               </div>
             </div>
-            <button className='text-white bg-regal-green  py-1.5 px-5 rounded-2xl hover:bg-opacity-80 active:scale-105 transition-all duration-200'>Book An Appointment</button>
+            <NavLink to='/booking' className='text-white bg-regal-green  py-1.5 px-5 rounded-2xl hover:bg-opacity-80 active:scale-105 transition-all duration-200'>Book An Appointment</NavLink>
           </div>
         </div>
       </div>

@@ -16,4 +16,24 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 } */
 
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; 
+}
+
+.scroll-container {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.scroll-content {
+  display: flex;
+  flex-wrap: nowrap;
+  scroll-snap-align: center;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
 

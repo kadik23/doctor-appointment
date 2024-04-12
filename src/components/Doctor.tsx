@@ -1,8 +1,9 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
+import { NavLink } from 'react-router-dom'
 
 function Doctor() {
   return (
-    <div className='border border-gray-200 flex flex-col items-center gap-3 mx-5 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-300  cursor-pointer'>
+    <NavLink to='/one_doctor_overview' className='border border-gray-200 flex flex-col items-center gap-3 mx-5 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-300  cursor-pointer'>
         <img src='' alt="Doctor Image" className='w-32 h-40'/>
         <div className='flex flex-col px-5 bg-white'>
             <h1 className='font-semibold text-lg'>Dr. Mohammad Amine</h1>
@@ -18,7 +19,7 @@ function Doctor() {
             </div>
             <button className='bg-green-50 text-regal-green px-3 m-3 hover:bg-opacity-50 transition-all duration-300 py-1 rounded-md'>Neurology Specialist</button>
         </div>
-    </div>
+    </NavLink>
   )
 }
 export default Doctor

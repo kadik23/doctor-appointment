@@ -1,5 +1,5 @@
 export type DoctorDoc = {
-    _id?: string;
+    id?: string;
     email?: string;
     fullname?: string;
     password?: string;
@@ -8,7 +8,7 @@ export type DoctorDoc = {
     biography?: string;
     rating?: string;
     image_profile?: string;
-    specializations?: Specialization[];
+    specializationIDs?: Specialization[];
 }
 
 type Specialization = {
@@ -19,7 +19,7 @@ type Specialization = {
 type error = {error:string}
 
 export type DoctorsRes = DoctorDoc | error
-export type DoctorRes = DoctorDoc | error
+export type DoctorRes = DoctorDoc[] | error
 
 export type DoctorFiltersData = {'fullname':string} | {'specialization':string} | {'rating':string} | null
 export type DoctorOptions = ['sortBy', 'sortOrder']

@@ -6,8 +6,44 @@ import { Icon } from '@iconify/react';
 import SpecializationCard from '../components/SpecializationCard';
 import Doctor from '../components/Doctor';
 import { NavLink } from 'react-router-dom';
-function Landing() {
+import useSpecializations from '../hooks/useSpecializations';
+import useDoctors from '../hooks/useDoctors';
+import { useEffect, useState } from 'react';
 
+function Landing() {
+  const { specializations } = useSpecializations()
+  const { doctors } = useDoctors()
+  const [filterDoctors,setFilterDoctors] = useState([])
+  const [filterSpecializations,setFilterSpecializations] = useState([])
+  useEffect(() => {
+    setFilterDoctors(doctors)
+  }, [doctors])
+  useEffect(() => {
+    setFilterSpecializations(specializations)
+  }, [specializations])
+  
+  
+  // const isDoctorDoc = (data: DoctorsRes): data is DoctorDoc => {
+  //   return (data as DoctorDoc).hasOwnProperty('specializations'); 
+  // };
+  
+  // const filterDoctorsBySpecializations = (ev: any) => {
+  //   const selectedSpecialization: string = ev.target.value;
+  //   const SpcID :string  = specializations.filter(specialization => specialization.name === selectedSpecialization);
+
+  //   setFilterDoctors(
+  //     doctors.filter((doctor: DoctorsRes) => {
+  //       if (isDoctorDoc(doctor)) {
+  //         return doctor.specializations.some((doctorSpecializationID: string) =>
+  //           SpcID === doctorSpecializationID.toString()
+  //         );
+  //       }
+  //       return false; 
+  //     })
+  //   );
+  // };
+  
+  
   return (
     <>
     <div className='mt-10 px-20 py-10 flex '>
@@ -100,14 +136,11 @@ function Landing() {
           <button className='text-regal-green border border-regal-green py-1.5 px-3 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200'>View All Specializations</button>
         </div>
         <div className='flex flex-wrap '>
-          <SpecializationCard />
-          <SpecializationCard />
-          <SpecializationCard />
-          <SpecializationCard />
-          <SpecializationCard />
-          <SpecializationCard />
-          <SpecializationCard />
-          <SpecializationCard />
+          {
+            filterSpecializations && ((filterSpecializations ).map((specialization, index) => (
+                <SpecializationCard key={index} specializationData={specialization}/>
+              )))
+          }
         </div>
       </div>
       <div className=' h-[32rem] pt-10  flex'>
@@ -149,21 +182,30 @@ function Landing() {
       </div>
       <div className='bg-regal-green h-[48rem] bg-opacity-10 p-16 flex flex-col gap-8 '>
         <h1 className='text-2xl font-bold mx-auto'>Meet Our Qualified Doctor</h1>
-        <p className='mx-auto text-center'>Talk to a doctor within minutes. Our qualified network of doctors is avalable 9/24. <br /> You can get a consultation whenever you need.</p>
+        <p className='mx-auto text-center'>Talk to a doctor within minutes. Our qualified network of doctors is available 9/24. <br /> You can get a consultation whenever you need.</p>
         <div className='flex flex-wrap '>
-          <button className='text-white border bg-regal-green py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'>All Specialists</button>
-          <button className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'>Gastronetrology</button>
-          <button className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'>Dentist</button>
-          <button className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'>Neurologist</button>
-          <button className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'>Orthopedics</button>
-          <button className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'>Cardiologist</button>
-          <button className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'>Medicine Specialist</button>
+        <button 
+          className='text-white border bg-regal-green py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'
+          // onClick={filterDoctorsBySpecializations}
+        >All Specialists</button>
+          {
+          specializations && specializations.splice(0,5).map((specialization, index) => (
+          <button 
+            // onClick={filterDoctorsBySpecializations}
+            key={index} 
+            className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'
+            >{specialization.name}</button>
+          ))
+          
+        }
+
         </div>
         <div className='flex flex-wrap py-3'>
-          <Doctor/>
-          <Doctor/>
-          <Doctor/>
-          <Doctor/>
+        {
+          filterDoctors && filterDoctors.splice(0,4).map((doctor, index) => (
+              <Doctor doctorData = {doctor} key={index} />
+            ))
+        }
         </div>
           <button className='text-regal-green border border-regal-green py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-auto'>See More Doctors</button>
       </div>

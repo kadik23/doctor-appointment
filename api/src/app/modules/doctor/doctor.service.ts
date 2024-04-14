@@ -1,41 +1,42 @@
 import prisma from "../../../shared/prisma";
 import { DoctorsRes, DoctorRes, DoctorFiltersData, DoctorOptions, DoctorDoc } from "./doctor.interface";
-import { Request, Response } from "express";
+import { Request } from "express";
 
 const getAllDoctors = async (filters: DoctorFiltersData, options: DoctorOptions): Promise<DoctorsRes> => {
     try {
         const andCondition: any = {}; 
-        if (filters) {
-            if ('fullname' in filters) {
-                const fullnameFilterValue = filters.fullname;
-                andCondition.fullname = { equals: fullnameFilterValue };
-            }
+        // if (filters) {
+        //     if ('fullname' in filters) {
+        //         const fullnameFilterValue = filters.fullname;
+        //         andCondition.fullname = { equals: fullnameFilterValue };
+        //     }
         
-            if ('specialization' in filters) {
-                const specializationFilterValue = filters.specialization;
-                andCondition.specialization = { equals: specializationFilterValue };
-            }
+        //     if ('specialization' in filters) {
+        //         const specializationFilterValue = filters.specialization;
+        //         andCondition.specialization = { equals: specializationFilterValue };
+        //     }
         
-            if ('rating' in filters) {
-                const ratingFilterValue = filters.rating;
-                if (!isNaN(Number(ratingFilterValue))) {
-                    andCondition.rating = { equals: parseInt(ratingFilterValue) };
-                } else {
-                    console.error('Rating filter value is not a valid number.');
-                }
-            }
-        }
+        //     if ('rating' in filters) {
+        //         const ratingFilterValue = filters.rating;
+        //         if (!isNaN(Number(ratingFilterValue))) {
+        //             andCondition.rating = { equals: parseInt(ratingFilterValue) };
+        //         } else {
+        //             console.error('Rating filter value is not a valid number.');
+        //         }
+        //     }
+        // }
         const whereCondition = Object.keys(andCondition).length > 0 ? { AND: andCondition } : {};
         const doctors = await prisma.Doctor.findMany({
             where: whereCondition
         });
         const mappedResult: DoctorsRes = doctors.map((doctor: DoctorDoc) => ({
-            _id: doctor._id,
+            _id: doctor.id,
             email: doctor.email,
             fullname: doctor.fullname,
             phone: doctor.phone,
             gender: doctor.gender,
             biography: doctor.biography,
+            specializationIDs: doctor.specializationIDs
         }));
 
         return mappedResult;

@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { scheduleService } from "./schedule.service";
-
 const createOneSchedule = async (req: Request, res: Response) => {
     const result = await scheduleService.createOneSchedule(req.body)
     if ('error' in result) {
@@ -19,7 +18,7 @@ const createManySchedule = async (req: Request, res: Response) => {
     }
 }
 
-const getSchedules = async (req: Request, res: Response) => {
+const getSchedules = async (req: Request, res: Response,) => {
     const {_id} = req.params
     const result = await scheduleService.getSchedules(_id)
     if ('error' in result) {

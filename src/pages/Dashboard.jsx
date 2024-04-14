@@ -1,8 +1,7 @@
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { AvailableSlot } from '../utils/schedule'
 
 function Dashboard() {
-    const available_slots:AvailableSlot[] = [
+    const available_slots = [
         { start_at:"8:00"  ,end_at: "8:45" },
         { start_at:"8:45"  ,end_at: "9:30" },
         { start_at:"9:30"  ,end_at: "10:15" },

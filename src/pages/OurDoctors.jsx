@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom"
 import slider from '../assets/Images/slider.jpg';
 
 function OurDoctors() {
+    
   return (
     <>
     <div className="w-full h-56 mt-3" style={{backgroundImage:`url('${slider}')`}}>

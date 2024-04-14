@@ -87,3 +87,13 @@ button:focus-visible {
   /* .hoverText{
     color: rgb(156 163 175)
   } */
+
+.description {
+  line-height: "1.25"; 
+}
+.truncate-lines-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

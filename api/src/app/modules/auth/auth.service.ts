@@ -3,46 +3,45 @@ import bcrypt from "bcrypt";
 import prisma from "../../../shared/prisma";
 import { LoginResponse, RegisterResponse } from "./auth.interface";
 
-
 const jwtSecret = 'sdjjfldwjn2vpbcwytp'
 const bcryptSalt = bcrypt.genSaltSync(10);
 
-const loginUser = async(user: any): Promise<LoginResponse> => {
-    const {email , password} = user 
-    try{
-        const userDoc = await prisma.Doctor.findOne({email})        
-        if (!userDoc) {
-            return {error: 'Email not found'}
-        }
-        const hashedPassword = userDoc.password
-        const passOk = bcrypt.compareSync(password,hashedPassword)
+const loginUser = async (user: any): Promise<LoginResponse> => {
+    const { email, password } = user;
 
-        if(passOk){
-            jwt.sign({
-                email:email ,
-                id: userDoc.id,
-            },jwtSecret,{},(err,token)=>{
-                if(err) throw err
-                return {accessToken: token, user:userDoc, error:false}
-            })
-        }else{
-            return {error:'pass not ok'}
-        } 
-        return {};
-    }catch(e){
-        return {error:e as string}
-    }
-}
+    try {
+        const userDoc = await prisma.Doctor.findUnique({
+            where: { email },
+        });
+
+        if (!userDoc) {
+            return { error: 'Invalid email or password' }; 
+        }
+
+        const passOk = bcrypt.compareSync(password, userDoc.password);
+
+        if (!passOk) {
+            return { error: 'Invalid email or password' }; 
+        }
+        const token = jwt.sign({
+            email:email ,
+            id: userDoc.id,
+        },jwtSecret,{})
+        return {accessToken: token, user:userDoc}
+        } catch (error) {
+            console.error(error); 
+            return { error: 'An error occurred during login' }; 
+        }
+};
 
 const registerUser = async (user: any): Promise<RegisterResponse> => {
     const { email, fullname, phone, gender, password, biography, specializationIds } = user;
-
     try {
         // Check if the user with the provided email already exists
-        // const existingUser = await prisma.Doctor.findOne({ where: { email } });
-        // if (existingUser) {
-        //     return { error: 'Email already exists' };
-        // }
+        const existingUser = await prisma.Doctor.findUnique({ where: { email } });
+        if (existingUser) {
+            return { error: 'Email already exists' };
+        }
 
         const hashedPassword = bcrypt.hashSync(password, bcryptSalt);
 

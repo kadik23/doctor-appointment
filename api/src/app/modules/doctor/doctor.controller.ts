@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { DoctorFiltersData,DoctorOptions } from "./doctor.interface";
-import pick from "../../../shared/pick";
 import { DoctorService } from "./doctor.service";
 
 const getAllDoctors = async(req: Request, res: Response) => {

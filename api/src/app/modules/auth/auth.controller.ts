@@ -7,7 +7,7 @@ const Login = async(req: Request,res: Response)=>{
     const result = await AuthService.loginUser(req.body);
     const { accessToken, error } = result;
     if (accessToken) {
-        res.cookie('token',accessToken,{maxAge:3600*3600,sameSite:'none',path:'*',secure:true}).json({userID:result.user})
+        res.cookie('token',accessToken,{maxAge:3600*3600,sameSite:'none',path:'*',secure:true}).json({user:result.user})
     }else {
         res.status(422).json(error)
     }
@@ -23,7 +23,12 @@ const Register = async (req: Request,res: Response)=>{
     }
 }
 
+const Logout = async (req: Request,res: Response) => {
+    res.cookie('token', '',{sameSite:'none',path:'*',secure:true}).json(true);
+};
+
 export const AuthController = {
     Login,
     Register,
+    Logout
 }

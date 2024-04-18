@@ -207,7 +207,7 @@ function Landing() {
             ))
         }
         </div>
-          <button className='text-regal-green border border-regal-green py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-auto'>See More Doctors</button>
+          <NavLink to={'/our_doctors'} className='text-regal-green border border-regal-green py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-auto'>See More Doctors</NavLink>
       </div>
       <div className='bg-regal-green flex items-center py-16 px-20 justify-between'>
         <div className='text-white flex flex-col gap-3'>
@@ -216,7 +216,7 @@ function Landing() {
         </div>
         <div className='flex items-center relative'>
           <img src={Arrow_Right} alt="" className='h-16 absolute top-5 right-36 opacity-80'/>
-          <NavLink to='/' className='bg-white hover:opacity-90 active:scale-105 transition-all duration-300 py-1 px-3 text-regal-green flex gap-2 rounded-xl items-center'>
+          <NavLink to='/sign_up' className='bg-white hover:opacity-90 active:scale-105 transition-all duration-300 py-1 px-3 text-regal-green flex gap-2 rounded-xl items-center'>
             <Icon icon="gravity-ui:calendar" width="18" height="18" />
             <span>Apply Now</span>
           </NavLink>

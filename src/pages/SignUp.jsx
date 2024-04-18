@@ -28,7 +28,7 @@ function SignUp() {
     
     async function registerUser() {
         try {   
-            await axios.post('auth/register', {
+            await axios.post('/register', {
             email,
             fullname,
             phone,

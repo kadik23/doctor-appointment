@@ -15,7 +15,7 @@ import axios from "axios";
 
 import AppLayout from './layouts/AppLayout'
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:3000/api/v1';
+axios.defaults.baseURL = 'http://localhost:3000/api/v1/auth';
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
             <Route path="home" element={<Landing />} /> 
             <Route path="one_appointment_overview" element={<OneAppointmentOverview />} /> 
             <Route path="our_doctors" element={<OurDoctors />} /> 
-            <Route path="one_doctor_overview" element={<OneDoctorOverview />} /> 
+            <Route path="one_doctor_overview/:id" element={<OneDoctorOverview />} /> 
             <Route path="my_appointments" element={<MyAppointment />} /> 
               <Route path="booking" element={<BookAppointment />} /> 
           </Route> 

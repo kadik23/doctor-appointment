@@ -8,7 +8,7 @@ import { ScheduleRouter } from '../modules/schedule/schedule.route';
 const router = express.Router();
 const moduleRoutes = [
     {
-        path: '/doctors',
+        path: '/auth/doctors',
         route: DoctorRouter,
     },
     {
@@ -16,15 +16,15 @@ const moduleRoutes = [
         route: AuthRouter,
     },
     {
-        path: '/specializations',
+        path: '/auth/specializations',
         route: SpecializationRouter,
     },
     {
-        path: '/appointments',
+        path: '/auth/appointments',
         route: AppointmentRouter,
     },
     {
-        path: '/schedules',
+        path: '/auth/schedules',
         route: ScheduleRouter
     },
 ]

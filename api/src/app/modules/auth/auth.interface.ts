@@ -1,7 +1,7 @@
 import { Gender } from "../../../enums";
 
 export type LoginResponse = {
-    accessToken?: string | null;
+    token?: string | null;
     user?: {};
     error?: string | null ;
 }

@@ -4,7 +4,7 @@ const jwtSecret = 'sdjjfldwjn2vpbcwytp'
 
 const loginMiddleware = (req: Request , res: Response ,next: NextFunction) =>{
     const {token} = req.cookies
-    console.log(token)
+    console.log(req.cookies)
     jwt.verify(token, jwtSecret, {}, async (err, userData) => {
         if (err) {
             return res.status(401).json({ error: 'Invalid or expired token' });

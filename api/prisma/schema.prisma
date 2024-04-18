@@ -14,8 +14,8 @@ model Doctor {
   fullname   String?
   phone     String?
   biography   String?
-  gender String?
-  rating    Int?
+  gender String? 
+  rating    Int? @default(0)
   imageProfile String?
   specializationIDs String[]   @db.ObjectId
   specializations Specialization[] @relation(fields: [specializationIDs], references: [id])

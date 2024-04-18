@@ -24,8 +24,8 @@ export default function useRooms() {
         }
     };
 
-    fetchSpecializations();
-  }, []);
+        fetchSpecializations();
+    }, []);
 
   return { specializations, isLoading, error };
 }

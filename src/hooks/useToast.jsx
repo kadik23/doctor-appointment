@@ -5,7 +5,6 @@ const DEFAULT_DURATION = 3000;
 export default function useToast() {
     let MESSAGE_ID = 0;
     const [messages, setMessages] = useState([]);
-
     const alert = (message, type, duration)=> {
         let id = MESSAGE_ID;
         setMessages(state => [...state, { id: id, message, type }]);

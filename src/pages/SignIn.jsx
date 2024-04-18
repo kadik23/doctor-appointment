@@ -20,12 +20,12 @@ function SignIn() {
     async function handleLoginSubmit(ev) {
         ev.preventDefault();
         try {
-            const data = await axios.post('/auth/login', {email,password});
+            const data = await axios.post('/login', {email,password});
             // setUserID(data.user.userID);
             console.log(data)
             alertSuccessHandler()
             setTimeout(() => {
-            setRedirect(true);
+                setRedirect(true);
             }, 3000);
         } catch (e) {
             alertErroreHandler()

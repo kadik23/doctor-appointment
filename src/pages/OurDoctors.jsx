@@ -1,10 +1,24 @@
 import { Icon } from "@iconify/react/dist/iconify.js"
 import { NavLink } from "react-router-dom"
 import slider from '../assets/Images/slider.jpg';
+import useDoctors from '../hooks/useDoctors';
+import useSpecializations from '../hooks/useSpecializations';
+import { useEffect } from "react";
 
 function OurDoctors() {
+    const {doctors} = useDoctors()
+    const { specializations } = useSpecializations()
+    useEffect(() => {
+        doctors.forEach(doc => {
+            doc.specializationNames = doc.specializationIDs.map(specID => {
+                const specialization = specializations.find(spec => spec.id === specID);
+                return specialization ? specialization.name : "";
+            });
+        });
+        console.log(doctors)
+    }, [doctors, specializations]);
     
-  return (
+    return (
     <>
     <div className="w-full h-56 mt-3" style={{backgroundImage:`url('${slider}')`}}>
         <div className="w-full  h-full bg-regal-green opacity-85 flex flex-col items-center justify-center">
@@ -38,100 +52,48 @@ function OurDoctors() {
             <div>
                 <h1>Select Specializations</h1>
                 <div>
-                    <div className="flex items-center gap-2">
-                        <input type="checkbox" name="Spc 1" id="" />
-                        <label htmlFor="Spc 1">Spc 1</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <input type="checkbox" name="Spc 2" id="" />
-                        <label htmlFor="Spc 2">Spc 2</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <input type="checkbox" name="Spc 3" id="" />
-                        <label htmlFor="Spc 3">Spc 3</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <input type="checkbox" name="Spc 4" id="" />
-                        <label htmlFor="Spc 4">Spc 4</label>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <input type="checkbox" name="Spc 5" id="" />
-                        <label htmlFor="Spc 5">Spc 5</label>
-                    </div>
+                    {specializations?.map(specialization=>(
+                        <div className="flex items-center gap-2">
+                            <input type="checkbox" name="Spc 1" id="" />
+                            <label htmlFor="Spc 1">{specialization.name}</label>
+                        </div>
+                        ))}
                 </div>
             </div>
         </div>
-        <div className="flex flex-col gap-10 my-5 mx-6">
-            <NavLink to='/one_doctor_overview' className="flex justify-between p-3 w-[42rem] my-5 shadow-sm rounded-xl border border-gray-200">
-                <div className="flex">
-                    <div className="m-3">
-                        <img src="Profile" alt="" className="w-32 h-32 rounded-full"/>
-                    </div>
-                    <div className="m-3 flex flex-col gap-5 items-start">
-                        <span className="font-semibold">Dr Kadik Salah Eddine</span>
-                        <span>kadiksalah03@gmail.com</span>
-                        <span>rate: 4</span>
-                        <div className="flex gap-3 items-center">
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 1</span>
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 2</span>
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 3</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex flex-col justify-end items-end">
-                    <div className="flex flex-col w-full items-end  gap-3 justify-end py-5">
-                        <NavLink to='/one_doctor_overview'  className='  py-1 px-5 rounded-2xl bg-white border border-regal-green text-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>VIEW PROFILE</NavLink>
-                        <NavLink to='/my_appointments'  className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>Book APPOINTMENT</NavLink>
-                    </div>
-                </div>
-            </NavLink>
-            <NavLink to='/one_doctor_overview' className="flex justify-between p-3 my-5 shadow-sm rounded-xl border border-gray-200">
+        {doctors && doctors.length > 0 ? (
+    <div className="flex flex-col gap-10 my-5 mx-6">
+        {doctors.map(doctor => (
+            <div className="flex justify-between p-3 my-5 shadow-sm rounded-xl border border-gray-200">
                 <div className="flex">
                     <div className="m-5">
                         <img src="Profile" alt="" className="w-32 h-32 rounded-full"/>
                     </div>
                     <div className="m-5 flex flex-col gap-5 items-start">
-                        <span className="font-semibold">Dr Kadik Salah Eddine</span>
-                        <span>kadiksalah03@gmail.com</span>
+                        <span className="font-semibold">Dr {doctor.fullname}</span>
+                        <span>{doctor.email}</span>
                         <span>rate: 4</span>
                         <div className="flex gap-3 items-center">
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 1</span>
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 2</span>
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 3</span>
+                            {doctor.specializationNames?.map((spc, index) => (
+                                <span key={index} className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap">
+                                    {spc}
+                                </span>
+                            ))}
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-col justify-end items-end">
-                    <div className="flex flex-col w-full items-end  gap-3 justify-end py-5">
-                        <NavLink to='/one_doctor_overview'  className='  py-1 px-5 rounded-2xl bg-white border border-regal-green text-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>VIEW PROFILE</NavLink>
-                        <NavLink to='/my_appointments'  className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>Book APPOINTMENT</NavLink>
+                    <div className="flex flex-col w-full items-end gap-3 justify-end py-5">
+                        <NavLink to={`/one_doctor_overview/${doctor._id}`} className='py-1 px-5 rounded-2xl bg-white border border-regal-green text-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>VIEW PROFILE</NavLink>
+                        <NavLink to='/booking' className='py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>Book APPOINTMENT</NavLink>
                     </div>
-                </div>
-            </NavLink>
-            <NavLink to='/one_doctor_overview' className="flex justify-between p-3 my-5 shadow-sm rounded-xl border border-gray-200">
-                <div className="flex">
-                    <div className="m-5">
-                        <img src="Profile" alt="" className="w-32 h-32 rounded-full"/>
-                    </div>
-                    <div className="m-5 flex flex-col gap-5 items-start">
-                        <span className="font-semibold">Dr Kadik Salah Eddine</span>
-                        <span>kadiksalah03@gmail.com</span>
-                        <span>rate: 4</span>
-                        <div className="flex gap-3 items-center">
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 1</span>
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 2</span>
-                            <span className="border border-gray-200 bg-white rounded-xl px-2 text-nowrap  ">Spc 3</span>
-                        </div>
-                    </div>
-                </div>
-                <div className="flex flex-col justify-end items-end">
-                    <div className="flex flex-col w-full items-end  gap-3 justify-end py-5">
-                        <NavLink to='/one_doctor_overview'  className='  py-1 px-5 rounded-2xl bg-white border border-regal-green text-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>VIEW PROFILE</NavLink>
-                        <NavLink to='/my_appointments'  className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>Book APPOINTMENT</NavLink>
-                    </div>
-                </div>
-            </NavLink>
+                </div>                
+            </div>
+                ))}
         </div>
+       ) : (
+           <p className="mt-10 mx-auto">Loading...</p>
+       )}
     </div>
     </>
   )

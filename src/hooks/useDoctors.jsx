@@ -7,29 +7,25 @@ export default function useRooms() {
     const [error, setError] = useState(null); 
 
     useEffect(() => {
-        const getRooms = async () => {
-            try{
-    
-            const {data} = await axios.get("/doctors/getAllDoctors")
-                if (data) {
-                    setDoctors(data);
-                    if(doctors){
-                        for(let i=0; i<doctors.length; i++) {
-                        console.log(doctors[i])
-                        }}
-                }
-                
-            }catch(err){
-                if (err.response && err.response.status === 401) {
-                console.log("Unauthorized access. Please log in.");
-                } 
-                else {
-                console.error("An error occurred while fetching data:", err);
-            }}
-        }    
-        getRooms();
+        getAllDoctors();
     }, []);
-
+    
+    const getAllDoctors = async () => {
+        try{
+            setIsLoading(true);
+            setError(null);
+            const {data} = await axios.get("/doctors/getAllDoctors")
+            if (data) {
+                setDoctors(data);
+            }
+        }catch(err){
+            if (err.response && err.response.status === 401) {
+            console.log("Unauthorized access. Please log in.");
+            } 
+            else {
+            console.error("An error occurred while fetching data:", err);
+        }}
+    }   
         
-    return { doctors };
+    return { doctors, isLoading, error, };
 }

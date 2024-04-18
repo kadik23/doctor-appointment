@@ -27,7 +27,10 @@ const loginUser = async (user: any): Promise<LoginResponse> => {
             email:email ,
             id: userDoc.id,
         },jwtSecret,{})
-        return {accessToken: token, user:userDoc}
+        
+        return {token: token, user:{
+            email: userDoc.email,fullname: userDoc.fullname,phone:userDoc.phone,gender:userDoc.gender,biography:userDoc.biography,specializationIds:userDoc.specializationIds
+        }}
         } catch (error) {
             console.error(error); 
             return { error: 'An error occurred during login' }; 
@@ -52,7 +55,7 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
                 phone,
                 gender,
                 password: hashedPassword,
-                biography,
+                biography:"i'm doctor in ..",
                 specializationIDs: specializationIds,
             },
         });
@@ -82,7 +85,7 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
     }
 };
 
-
+    
 export const AuthService = {
     loginUser,
     registerUser

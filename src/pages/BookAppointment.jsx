@@ -10,41 +10,22 @@ function BookAppointment() {
     const steps = [
         {
             title: 'Select Specialization & Doctor',
-            content: <SelectSpecializationDoctor
-                // handleDateChange={handleDateChange}
-                // selectedDate={selectedDate}
-                // selectTime={selectTime}
-                // setSelectTime={setSelectTime}
-            />
+            content: <SelectSpecializationDoctor/>
         },
         {
             title: 'Select Appointment Date & Time',
-            content: <SelectDateTime
-                // handleChange={handleChange}
-                // selectValue={selectValue} 
-                // setPatientId={setPatientId}
-            />
+            content: <SelectDateTime/>
         },
         {
             title: 'Patient Information',
-            content: <PersonalInformation
-                // handleChange={handleChange}
-                // selectValue={selectValue}
-                // isCheck={isCheck}
-                // setIsChecked={setIsChecked}
-                // data={false}
-                // selectedDate={selectedDate}
-                // selectTime={selectTime}
-            />,
+            content: <PersonalInformation/>,
         },
         ]
         
     return (
         <>
             <div>
-                {/* <Steps current={current} items={items} /> */}
                 {steps[step-1].content}
-                {/* {steps[parseInt(step-1)].content} */}
             </div>
         </>
 

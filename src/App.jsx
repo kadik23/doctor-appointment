@@ -28,13 +28,13 @@ function App() {
           <Route path="sign_up" element={<SignUp />} /> 
           <Route path='/' element={<Root />}>
             <Route path="home" element={<Landing />} /> 
-            <Route path="one_appointment_overview" element={<OneAppointmentOverview />} /> 
             <Route path="our_doctors" element={<OurDoctors />} /> 
             <Route path="one_doctor_overview/:id" element={<OneDoctorOverview />} /> 
-            <Route path="my_appointments" element={<MyAppointment />} /> 
-              <Route path="booking" element={<BookAppointment />} /> 
+            <Route path="booking" element={<BookAppointment />} /> 
           </Route> 
           <Route path='/' element={(<Doctor />)}>
+            <Route path="my_appointments" element={<MyAppointment />} /> 
+            <Route path="one_appointment_overview" element={<OneAppointmentOverview />} /> 
             <Route path="dashboard" element={<Dashboard />} /> 
           </Route>
         </Route>

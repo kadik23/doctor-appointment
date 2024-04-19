@@ -97,3 +97,22 @@ button:focus-visible {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.open > summary {
+  transform: rotate(90deg);
+  transition: transform 0.3s ease-in-out;
+}
+
+
+ul {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.open > ul {
+  max-height: 1000px; 
+  opacity: 1;
+}
+

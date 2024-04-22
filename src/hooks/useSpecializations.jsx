@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function useRooms() {
+export default function useSpecializations() {
     const [specializations, setSpecializations] = useState([]);
     const [isLoading, setIsLoading] = useState(false); 
     const [error, setError] = useState(null); 

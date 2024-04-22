@@ -11,7 +11,7 @@ function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
-    // const {userID,setUserID} = useContext(UserContext);
+    const {setUserID} = useContext(UserContext);
 
     const toastManager = useContext(ToastContext);
     const alertSuccessHandler = () => { toastManager.alertSuccess("Login successful"); }
@@ -21,7 +21,7 @@ function SignIn() {
         ev.preventDefault();
         try {
             const data = await axios.post('/login', {email,password});
-            // setUserID(data.user.userID);
+            setUserID(data.user.userID);
             console.log(data)
             alertSuccessHandler()
             setTimeout(() => {

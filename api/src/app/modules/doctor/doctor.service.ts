@@ -42,7 +42,7 @@ const getAllDoctors = async (filters: DoctorFiltersData, options: DoctorOptions)
         return mappedResult;
     } catch (e) {
         console.error('Error retrieving doctors:', e);
-        return { error: 'An error occurred during execution' };
+        return { error: 'An error occurred during retrieving doctors' };
     }
 }
 
@@ -56,7 +56,7 @@ const getDoctor = async (id: string): Promise<DoctorRes> => {
     return result;
     } catch (e) {
         console.error('Error retrieving doctor:', e);
-        return { error: e as string}
+        return { error: 'Error retrieving doctor'}
     }
 }
 
@@ -70,7 +70,7 @@ const deleteDoctor = async (id: string): Promise<any> => {
         return result;
     } catch (e) {
         console.error('Error deleting doctor:', e);
-        return { error: e as string}
+        return { error: 'Error deleting doctor'}
     }
 }
 
@@ -87,8 +87,8 @@ const updateDoctor = async (req: Request): Promise<DoctorRes> => {
 
         return result;
     } catch (e) {
-        console.error('Error deleting doctor:', e);
-        return { error: e as string };
+        console.error('Error updating doctor:', e);
+        return { error: "Error updating doctor" };
     }
 }
 

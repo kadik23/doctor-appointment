@@ -38,15 +38,15 @@ const getAllAppointments = async(): Promise<appointmentRes> =>{
 
 const getOneAppointment = async(id:string): Promise<appointmentRes> =>{
     try {
-        const appointment = await prisma.Appointment.findMany({
+        const appointment = await prisma.Appointment.findFirst({
             where: {
                 id: id
             }
         })
         return appointment
     }catch(err){
-        console.error('Error registering user:', err);
-        return { error: 'An error occurred during registration' };
+        console.error('Error retrieving appointment:', err);
+        return { error: 'An error occurred during retrieving' };
     }
 }
 
@@ -59,7 +59,7 @@ const deleteAppointment = async (id: string): Promise<any> => {
         })
         return result;
     } catch (e) {
-        console.error('Error deleting doctor:', e);
+        console.error('Error deleting appointment:', e);
         return { error: e as string}
     }
 }

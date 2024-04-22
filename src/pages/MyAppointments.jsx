@@ -1,6 +1,10 @@
 import OneAppointmentCard from "../components/OneAppointmentCard"
+import { useEffect,useState } from "react";
+import useAppointments from '../hooks/useAppointments';
 
 function MyAppointment() {
+  const { appointments } = useAppointments();
+
   return (
     <div className='w-2/3 m-10 p-5  bg-white rounded-xl overflow-scroll scrollbar-none'>
         <h1 className='text-xl font-semibold  text-nowrap'>MY APPOINTMENTS</h1>
@@ -12,15 +16,9 @@ function MyAppointment() {
             <span className='w-20 text-center'>Status</span>
             <span className='w-20 text-center'>Action</span>
           </div>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
-          <OneAppointmentCard/>
+          {appointments.map(appointment => (
+            <OneAppointmentCard appointment={appointment}/>
+          ))}
         </div>
     </div>
   )

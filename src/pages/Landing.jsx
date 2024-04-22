@@ -137,7 +137,7 @@ function Landing() {
         </div>
         <div className='flex flex-wrap '>
           {
-            filterSpecializations && ((filterSpecializations ).map((specialization, index) => (
+            specializations && filterSpecializations && ((filterSpecializations ).map((specialization, index) => (
                 <SpecializationCard key={index} specializationData={specialization}/>
               )))
           }

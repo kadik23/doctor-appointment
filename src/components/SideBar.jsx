@@ -38,7 +38,8 @@ function SideBar() {
                 to='/dashboard'
                 className={
                     ({ isActive }) => isActive ? "text-regal-green" : "hover:text-regal-green"
-                } style={{display: 'flex', alignItems: 'center', gap:'0.75rem', width:'10rem'}}
+                } 
+                style={{display: 'flex', alignItems: 'center', gap:'0.75rem', width:'10rem'}}
             >
                 <Icon icon="material-symbols:dashboard" width="18" height="18" />
                 <span>Dashboard</span>
@@ -47,7 +48,8 @@ function SideBar() {
                 to='/my_appointments'
                 className={
                     ({ isActive }) => isActive ? "text-regal-green" : "hover:text-regal-green"
-                } style={{display: 'flex', alignItems: 'center', gap:'0.75rem', width:'10rem'}}
+                } 
+                style={{display: 'flex', alignItems: 'center', gap:'0.75rem', width:'10rem'}}
             >
                 <Icon icon="icon-park-solid:appointment" width="18" height="18" />
                 <span className='text-nowrap'>My Appointment</span>

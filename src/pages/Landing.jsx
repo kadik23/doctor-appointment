@@ -11,39 +11,35 @@ import useDoctors from '../hooks/useDoctors';
 import { useEffect, useState } from 'react';
 
 function Landing() {
-  const { specializations } = useSpecializations()
+  const {specializations} = useSpecializations()
   const { doctors } = useDoctors()
   const [filterDoctors,setFilterDoctors] = useState([])
-  const [filterSpecializations,setFilterSpecializations] = useState([])
+  const [specializationSelected,setSpecializationSelected] = useState(null);
+  const [filteredDoctors, setFilteredDoctors] = useState(null)
+
   useEffect(() => {
     setFilterDoctors(doctors)
+    console.log(doctors)
   }, [doctors])
-  useEffect(() => {
-    setFilterSpecializations(specializations)
-  }, [specializations])
-  
-  
-  // const isDoctorDoc = (data: DoctorsRes): data is DoctorDoc => {
-  //   return (data as DoctorDoc).hasOwnProperty('specializations'); 
-  // };
-  
-  // const filterDoctorsBySpecializations = (ev: any) => {
-  //   const selectedSpecialization: string = ev.target.value;
-  //   const SpcID :string  = specializations.filter(specialization => specialization.name === selectedSpecialization);
 
-  //   setFilterDoctors(
-  //     doctors.filter((doctor: DoctorsRes) => {
-  //       if (isDoctorDoc(doctor)) {
-  //         return doctor.specializations.some((doctorSpecializationID: string) =>
-  //           SpcID === doctorSpecializationID.toString()
-  //         );
-  //       }
-  //       return false; 
-  //     })
-  //   );
-  // };
+  useEffect(() => {
+    console.log(specializations)
+    setFilteredDoctors(doctors); 
+  }, [specializations]);
+
+  useEffect(() => {
+    selectDoctor()
+  }, [specializationSelected])
   
-  
+  const selectDoctor = () => {
+    if (!specializationSelected) return setFilteredDoctors(doctors); 
+    const specializationFiltered = specializations.filter(specialization => specialization.name == specializationSelected)
+    const filtered = doctors.filter((doctor) => {
+        return doctor?.specializationIDs?.some((specializationID) => specializationID === specializationFiltered[0].id);
+    });
+    setFilteredDoctors(filtered); 
+}
+
   return (
     <>
     <div className='mt-10 px-20 py-10 flex '>
@@ -137,9 +133,9 @@ function Landing() {
         </div>
         <div className='flex flex-wrap '>
           {
-            specializations && filterSpecializations && ((filterSpecializations ).map((specialization, index) => (
+            specializations && specializations.map((specialization, index) => (
                 <SpecializationCard key={index} specializationData={specialization}/>
-              )))
+              ))
           }
         </div>
       </div>
@@ -186,12 +182,12 @@ function Landing() {
         <div className='flex flex-wrap '>
         <button 
           className='text-white border bg-regal-green py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'
-          // onClick={filterDoctorsBySpecializations}
-        >All Specialists</button>
+          onClick={() => setSpecializationSelected()}            
+          >All Specialists</button>
           {
-          specializations && specializations.splice(0,5).map((specialization, index) => (
+          specializations && specializations.slice(0,5).map((specialization, index) => (
           <button 
-            // onClick={filterDoctorsBySpecializations}
+            onClick={() => setSpecializationSelected(specialization.name)}            
             key={index} 
             className='text-gray-500 border border-gray-500 py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-3'
             >{specialization.name}</button>
@@ -201,8 +197,7 @@ function Landing() {
 
         </div>
         <div className='flex flex-wrap py-3'>
-        {
-          filterDoctors && filterDoctors.splice(0,4).map((doctor, index) => (
+        {doctors && filteredDoctors && filteredDoctors.slice(0,4).map((doctor, index) => (
               <Doctor doctorData = {doctor} key={index} />
             ))
         }

@@ -6,12 +6,14 @@ export default function useSpecializations() {
     const [isLoading, setIsLoading] = useState(false); 
     const [error, setError] = useState(null); 
 
-    useEffect(() => {
-        const fetchSpecializations = async () => {
-        setIsLoading(true);
-        setError(null); 
+    useEffect(() => {   
+        fetchSpecializations();
+    }, []);
 
+    const fetchSpecializations = async () => {
         try {
+            setIsLoading(true);
+            setError(null); 
             const {data} = await axios.get("/specializations/getAllSpecializations");
             if (data) {
                 setSpecializations(data);
@@ -23,9 +25,6 @@ export default function useSpecializations() {
             setIsLoading(false);
         }
     };
-
-        fetchSpecializations();
-    }, []);
-
+    
   return { specializations, isLoading, error };
 }

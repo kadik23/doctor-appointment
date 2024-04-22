@@ -12,8 +12,8 @@ import OurDoctors from './pages/OurDoctors'
 import OneDoctorOverview from './pages/OneDoctorOverview'
 import BookAppointment from './pages/BookAppointment'
 import axios from "axios";
-
 import AppLayout from './layouts/AppLayout'
+
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://localhost:3000/api/v1/auth';
 

@@ -28,7 +28,7 @@ function PersonalInformation() {
             );
             alertSuccessHandler("Appointment successfully sent");
         } catch (e) {
-            alertErroreHandler();
+            // alertErroreHandler();
         }
     }
 

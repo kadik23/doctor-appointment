@@ -46,50 +46,58 @@ function SelectSpecialization() {
             <div>
                 <h1 className='text-center text-lg font-bold mt-10'>Available Specializations</h1>
                 <div className='relative w-[80%]   mx-auto  '>
-                    <div className="flex scroll-container w-full scrollbar-none bg-[#F0F0F0] m-5 rounded-xl p-5">
+                    <div className="flex scroll-container w-full scrollbar-none bg-regal-green bg-opacity-10 m-5 rounded-xl p-5">
                         <div className="scroll-content flex gap-16 min-w-full">
-                            {specializations && specializations.map((specialization, index) => (
+                            {specializations.length > 0 ? (specializations.map((specialization, index) => (
                             <div key={index} >
                                 <div className='cursor-pointer hover:scale-105 transition-all duration-500' onClick={() => setSpecializationSelected(specialization.name)}>
                                     <img src="ICON" alt="" className='w-20 h-20 rounded-full border-2 border-gray-400'/>
                                     <h1> {specialization.name}</h1>
                                 </div>
                             </div>
-                            ))}
+                            )))
+                            : ( <span className='mx-auto'>Loading...</span>)
+                        }
                         </div>
                     </div>
                     <Icon icon="fe:arrow-left" width="18" height="18"className='text-regal-green  absolute left-5 top-[40%] ' />
                     <Icon icon="fe:arrow-right" width="18" height="18"className='text-regal-green absolute right-0 top-[40%]' />
                 </div>
             </div>
-            <div className='text-center w-32 text-nowrap mx-auto'>Selected: <span className='font-semibold '>{specializationSelected}</span></div>
+            <div className='text-center text-nowrap mx-auto'> {specializationSelected?  <span className='font-semibold '>Selected: {specializationSelected}</span>: <span className='font-semibold '>Please select a specialization</span>}</div>
             <div className={`relative w-[80%]   mx-auto ${filteredDoctors !== null ? '' : 'hidden'} transition-all duration-300 ease-in-out`}>
-                <div className="flex scroll-container w-full scrollbar-none bg-[#F0F0F0] m-5 rounded-xl p-5">
+                <div className="flex scroll-container w-full scrollbar-none bg-regal-green bg-opacity-10 m-5 rounded-xl p-5">
                     <div className="scroll-content flex gap-16 min-w-full">
-                        {doctors && filteredDoctors && filteredDoctors.map((doctor, index) => (
-                        <div key={index} >
-                            <Doctor doctorData={doctor}/>
-                            <div key={index} className='flex w-full justify-center my-2' onClick={() =>setDoctorSelected(doctor)}>
-                                <input
-                                    type="radio"
-                                    id={`option-${index}`}
-                                    className="hidden"
-                                    name="options"
-                                    checked={selectedOption === index}
-                                    onChange={() => handleOptionChange(index)}
-                                />
-                                <label
-                                    htmlFor={`option-${index}`}
-                                    className="w-6 h-6 rounded-full border border-gray-300 bg-white cursor-pointer flex items-center justify-center"
-                                >
-                                    <div className={`w-3 h-3 rounded-full ${selectedOption === index ? 'bg-regal-green' : ''}`}></div>
-                                </label>
-                            </div>
+                    {
+                filteredDoctors && filteredDoctors.length > 0 ? (
+                    filteredDoctors.map((doctor, index) => (
+                    <div key={index}>
+                        <Doctor doctorData={doctor}/>
+                        <div key={index} className='flex w-full justify-center my-2' onClick={() => setDoctorSelected(doctor)}>
+                        <input
+                            type="radio"
+                            id={`option-${index}`}
+                            className="hidden"
+                            name="options"
+                            checked={selectedOption === index}
+                            onChange={() => handleOptionChange(index)}
+                        />
+                        <label
+                            htmlFor={`option-${index}`}
+                            className="w-6 h-6 rounded-full border border-gray-300 bg-white cursor-pointer flex items-center justify-center"
+                        >
+                            <div className={`w-3 h-3 rounded-full ${selectedOption === index ? 'bg-regal-green' : ''}`}></div>
+                        </label>
                         </div>
-                        ))}
+                    </div>
+                    ))
+                ) : (
+                    <div className='mx-auto font-semibold '>No doctors in this selected specialization</div>
+                )
+                }
                     </div>
                 </div>                
-                <div className='text-center w-36 text-nowrap mx-auto'>Selected: <span className='font-semibold'>{doctorSelected && `Dr ${doctorSelected.fullname}`}</span></div>
+               {!filteredDoctors && <div className='text-center w-36 text-nowrap mx-auto'>Selected: <span className='font-semibold'>{doctorSelected && `Dr ${doctorSelected.fullname}`}</span></div>}
             </div>
             <div className='flex justify-end items-center mr-52 my-10 w-full'>
                 <button onClick={nextStep} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 mr-24'>NEXT</button>

@@ -197,10 +197,11 @@ function Landing() {
 
         </div>
         <div className='flex flex-wrap py-3'>
-        {doctors && filteredDoctors && filteredDoctors.slice(0,4).map((doctor, index) => (
+        {doctors && filteredDoctors && filteredDoctors.length >0 ?( filteredDoctors.slice(0,4).map((doctor, index) => (
               <Doctor doctorData = {doctor} key={index} />
-            ))
-        }
+            )))
+        :
+        ( <div className='mx-auto font-semibold '>No doctors in this selected specialization</div> )}
         </div>
           <NavLink to={'/our_doctors'} className='text-regal-green border border-regal-green py-1 px-5 rounded-2xl hover:text-white hover:bg-regal-green transition-all duration-200 mx-auto'>See More Doctors</NavLink>
       </div>

@@ -132,7 +132,7 @@ function SignUp() {
         </div>
         <div className='h-screen bg-regal-green w-1/2 gap-3  rounded-bl-full flex flex-col items-center justify-center text-white'>
             <h1 className='text-2xl font-bold'>One of us?</h1>
-            <p className='text-center'>Neque porro quisquam est qui dolorem ipsum quia dolor <br /> sit amet, consectetur, adipisci velit.</p>
+            <p className='text-center'>If you're a qualified doctor, we highly encourage you to sign <br />  up for our program today. Don't miss out!</p>
             <NavLink to='/sign_in' className='text-white border-2 border-white py-1 px-5 rounded-2xl hover:bg-white hover:text-regal-green  transition-all duration-200 mx-3'>SIGN IN</NavLink>
             <img src={SignUpImg} alt="" className='h-56 w-56 rounded-full  '/>
         </div>

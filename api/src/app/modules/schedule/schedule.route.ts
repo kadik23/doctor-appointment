@@ -6,6 +6,6 @@ const router = express.Router();
 
 // router.post('/createOneSchedule',loginMiddleware, scheduleController.createOneSchedule)
 router.post('/createManySchedule',loginMiddleware, scheduleController.createManySchedule)
-router.get('/getSchedules/:_id',loginMiddleware, scheduleController.getSchedules)
+router.get('/getSchedules/:_id', scheduleController.getSchedules)
 
 export const ScheduleRouter = router;

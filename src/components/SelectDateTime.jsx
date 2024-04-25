@@ -1,6 +1,6 @@
 import Steps from './Steps'
 import { Icon } from '@iconify/react/dist/iconify.js'
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, useState } from 'react';
 import ToastContext from '../contexts/ToastContext';
 import useBooking from '../hooks/useBooking';
 import { BookContext } from '../contexts/BookContext';
@@ -18,6 +18,8 @@ function SelectDateTime() {
     const toastManager = useContext(ToastContext);
     const alertErroreHandler = () => { toastManager.alertError("Login failed"); }
     const {  patientData } = useContext(BookContext)
+    const [selectedDateIndex, setSelectedDateIndex] = useState(-1);
+    const [selectedTimeIndex, setSelectedTimeIndex] = useState(-1); 
 
     useEffect(() => {
         console.log(patientData)
@@ -49,18 +51,24 @@ function SelectDateTime() {
                 <hr />
                 <div className='flex flex-wrap'>
                 {nextSixDays &&
-                    nextSixDays.map((date) => {
-                    return (
-                        <div
-                            key={date.id}
-                            onClick={(e) => {getDate(date)}}
-                            // className={`w-20 h-16 cursor-pointer  flex flex-col border-2 items-center justify-center ${selectedDate == null ? 'border-regal-green ' : 'bg-regal-green text-white' } hover:bg-regal-green hover:text-white rounded-lg p-16 m-3  transition-all duration-500`}
-                            className={`w-20 h-16 cursor-pointer  flex flex-col border-2 items-center justify-center hover:bg-regal-green hover:text-white rounded-lg p-16 m-3  transition-all duration-500`}
-                        >
-                            <span className='text-nowrap'>{date.date}</span>
-                            <span className="weekday">{date.day}</span>
-                        </div>
-                    );
+            nextSixDays.map((date, index) => {
+                return (
+                    <div
+                    key={date.id}
+                    onClick={() => {
+                        getDate(date);
+                        setSelectedDateIndex(index);
+                    }}
+                    className={`w-20 h-16 cursor-pointer  flex flex-col border-2 items-center justify-center ${
+                        selectedDateIndex === index
+                        ? 'bg-regal-green text-white'
+                        : 'bg-white'
+                    } hover:bg-regal-green hover:text-white rounded-lg p-16 m-3  transition-all duration-500`}
+                    >
+                    <span className='text-nowrap'>{date.date}</span>
+                    <span className="weekday">{date.day}</span>
+                    </div>
+                );
                 })}
                 </div>
             </div>
@@ -73,20 +81,30 @@ function SelectDateTime() {
                 <h1 className='font-semibold'>Available Times <span className='opacity-80'>(8AM - 16:45)</span></h1>
                 <div className='flex flex-wrap'>
                     {selectedDate && selectedDate.map((slot, index) => (
-                        <div
-                            key={index}
-                            className='px-2 bg-white border border-gray-200 m-2 hover:text-white shadow-sm cursor-pointer hover:bg-regal-green transition-all duration-500 flex items-center'
-                            onClick={() => {setSelectedAppointment({ ...selectedAppointment, time: slot.start_at })}}
-                        >
-                            {slot.start_at} <span className="ml-1">AM</span>
-                        </div>
+                    <div
+                        key={index}
+                        onClick={() => {
+                        setSelectedAppointment({ ...selectedAppointment, time: slot.start_at });
+                        setSelectedTimeIndex(index); 
+                        }}
+                        className={`px-2 border border-gray-200 m-2 hover:text-white shadow-sm cursor-pointer hover:bg-regal-green transition-all duration-500 flex items-center ${
+                        selectedTimeIndex === index 
+                            ? 'bg-regal-green text-white'
+                            : 'bg-white text-black'
+                        }`}
+                    >
+                        {slot.start_at} <span className="ml-1">AM</span>
+                    </div>
                     ))}
                 </div>
             </div>
         </div>
         <div className='flex justify-end items-center mr-52 my-10 w-full'>
             <button onClick={previousStep}  className='  py-1 px-5 rounded-2xl text-regal-green border border-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>PREVIOUS</button>
-            <button onClick={nextStep2} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 mr-24'>NEXT</button>
+            {selectedAppointment && selectedDate
+                    ? <button onClick={nextStep2} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 mr-24'>NEXT</button>
+                    : <button className=' cursor-default py-1 px-5 rounded-2xl bg-black text-white opacity-20 mx-3 mr-24'>NEXT</button>
+            }
         </div>
     </div>
   )

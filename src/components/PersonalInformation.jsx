@@ -28,7 +28,7 @@ function PersonalInformation() {
             );
             alertSuccessHandler("Appointment successfully sent");
         } catch (e) {
-            // alertErroreHandler();
+            alertErroreHandler();
         }
     }
 
@@ -88,7 +88,10 @@ function PersonalInformation() {
             </div>
             <div className='flex justify-end items-center mr-52 my-10 w-full'>
                 <button onClick={previousStep} className='  py-1 px-5 rounded-2xl text-regal-green border border-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>PREVIOUS</button>
-                <button onClick={sendAppointment} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>Book</button>
+                {fullname && age && phone 
+                    ? <button onClick={sendAppointment} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 mr-24'>NEXT</button>
+                    : <button className=' cursor-default py-1 px-5 rounded-2xl bg-black text-white opacity-20 mx-3 mr-24'>Book</button>
+                }
             </div>
         </div>
     </div>

@@ -7,7 +7,6 @@ function SelectSpecialization() {
     
     const {
         selectedOption,
-        doctors,
         specializationSelected,setSpecializationSelected,
         doctorSelected,setDoctorSelected,
         specializations,
@@ -15,7 +14,6 @@ function SelectSpecialization() {
         handleOptionChange,
         selectDoctor,
         nextStep,
-        previousStep,
     } = useBooking()
     useEffect(() => {
         selectDoctor()
@@ -100,7 +98,10 @@ function SelectSpecialization() {
                {!filteredDoctors && <div className='text-center w-36 text-nowrap mx-auto'>Selected: <span className='font-semibold'>{doctorSelected && `Dr ${doctorSelected.fullname}`}</span></div>}
             </div>
             <div className='flex justify-end items-center mr-52 my-10 w-full'>
-                <button onClick={nextStep} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 mr-24'>NEXT</button>
+                {doctorSelected && specializationSelected
+                    ? <button onClick={nextStep} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 mr-24'>NEXT</button>
+                    : <button className=' cursor-default py-1 px-5 rounded-2xl bg-black text-white opacity-20 mx-3 mr-24'>NEXT</button>
+                }
             </div>
         </div>
     </div>  )

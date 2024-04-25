@@ -1,30 +1,8 @@
 import prisma from "../../../shared/prisma";
-import { Request, Response } from "express";
-import { ResponseSchedule, newOneScheduleReq, available_slots, weekDays, newSchedulesReq } from "./schedule.interface";
-
-const createOneSchedule = async (req: newOneScheduleReq): Promise<ResponseSchedule> => {
-    try{
-            if (req.day == 'friday'){
-                return {error: 'Friday is not available for work'}
-            }
-            const { start_time = "08:00", end_time = "16:45", ...rest } = req;
-            const newScheduleData = { ...rest, start_time, end_time,available_slots };
-            const schedule = await prisma.Schedule.create({
-                data: newScheduleData
-            })
-            console.log(req.day)
-            return schedule;
-    }catch(err){
-        console.log("Error creating schedule:", err)
-        return {error : err as string} 
-    }
-}
+import { ResponseSchedule, available_slots, weekDays, newSchedulesReq } from "./schedule.interface";
 
 const createSchedules = async (req: newSchedulesReq): Promise<ResponseSchedule> => {
     try{
-            // if (req.day == 'friday'){
-            //     return {error: 'Friday is not available for work'}
-            // }
             const { start_time = "08:00", end_time = "16:45", ...rest } = req;
             const getSchedules = await prisma.Schedule.findMany({
                 where:{doctor_id : rest.doctor_id}
@@ -53,15 +31,12 @@ const createSchedules = async (req: newSchedulesReq): Promise<ResponseSchedule> 
                 }
                 return schedule;
             }
-            // return {error: 'something went wrong'}
             else if(schedulesNumber > 5 ){
                 return { error: 'Something went wrong'}
             }else{
                 const daysLoop = 6 - schedulesNumber
                 const LastSchedule= getSchedules[schedulesNumber - 1] 
-                // for(let i=1;i<=schedulesNumber+1;i++){
-                    currentDate.setDate(currentDate.getDate() + (schedulesNumber -1) );
-                // }
+                currentDate.setDate(currentDate.getDate() + (schedulesNumber -1) );
                 var weekdayName = LastSchedule.day
                 var dayOfWeekNumber = weekDays.indexOf(weekdayName)
                 for(let i = 0;i<daysLoop;i++ ){
@@ -97,7 +72,6 @@ const getSchedules = async (_id: String): Promise<ResponseSchedule> => {
 }
 
 export const scheduleService = {
-    createOneSchedule,
     createSchedules,
     getSchedules
 }

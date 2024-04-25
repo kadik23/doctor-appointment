@@ -4,7 +4,7 @@ export interface patientRes{
     id?:string
     fullname?: string
     gender?: Gender
-    age?: number
+    age?: string
     phone?: string
     error?:  string
 }

@@ -17,6 +17,17 @@ const getOnePatient = async(id:string): Promise<patientRes> =>{
     }
 }
 
+const getAllPatients = async(): Promise<patientRes[] | patientRes> =>{
+    try {
+        const patients = await prisma.Patient.findMany()
+        return patients
+    }catch(err){
+        console.error('Error retrieving patient:', err);
+        return { error: 'An error occurred during fetching' };
+    }
+}
+
 export const PatientService = {
-    getOnePatient
+    getOnePatient,
+    getAllPatients
 }

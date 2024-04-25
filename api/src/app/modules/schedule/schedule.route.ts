@@ -8,4 +8,4 @@ const router = express.Router();
 router.post('/createManySchedule',loginMiddleware, scheduleController.createManySchedule)
 router.get('/getSchedules/:_id', scheduleController.getSchedules)
 
-export const ScheduleRouter = router;
+export const ScheduleRouter = router;   

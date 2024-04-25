@@ -11,7 +11,6 @@ function SignIn() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [redirect, setRedirect] = useState(false);
-    const {setUserID} = useContext(UserContext);
 
     const toastManager = useContext(ToastContext);
     const alertSuccessHandler = () => { toastManager.alertSuccess("Login successful"); }
@@ -21,7 +20,6 @@ function SignIn() {
         ev.preventDefault();
         try {
             const data = await axios.post('/login', {email,password});
-            setUserID(data.user.userID);
             console.log(data)
             alertSuccessHandler()
             setTimeout(() => {
@@ -40,7 +38,7 @@ function SignIn() {
     <div className='w-screen h-screen flex'>
         <div className='h-screen bg-regal-green w-1/2 gap-3  rounded-br-full flex flex-col items-center justify-center text-white'>
             <h1 className='text-2xl font-bold'>Now here?</h1>
-            <p className='text-center'>If you are a qualified doctor with us, we kindly ask you <br /> to sign in to access your account. Thank you. </p>
+            <p className='text-center'>If you're a qualified doctor, we highly encourage you to sign up for our program today. Don't miss out! <br /> to sign in to access your account. Thank you. </p>
             <NavLink to='/sign_up' className='text-white border-2 border-white py-1 px-5 rounded-2xl hover:bg-white hover:text-regal-green  transition-all duration-200 mx-3'>SIGN UP</NavLink>
             <img src={SignInImg} alt="" className='h-56 w-56 rounded-full'/>
         </div>

@@ -12,6 +12,16 @@ const getOnePatient = async (req: Request, res: Response) => {
     }
 }
 
+const getAllPatients = async (req: Request, res: Response) => {
+    const result = await PatientService.getAllPatients()
+    if ('error' in result) {
+        res.status(500).json({ error: result.error });
+    } else {
+        res.json(result);
+    }
+}
+
 export const patientController = {
     getOnePatient,
+    getAllPatients
 }

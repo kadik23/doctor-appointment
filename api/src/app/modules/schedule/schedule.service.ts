@@ -4,8 +4,8 @@ import { ResponseSchedule, available_slots, weekDays, newSchedulesReq } from "./
 const createSchedules = async (req: newSchedulesReq): Promise<ResponseSchedule> => {
     try{
             const { start_time = "08:00", end_time = "16:45", ...rest } = req;
-            const getSchedules = await prisma.Schedule.findMany({
-                where:{doctor_id : rest.doctor_id}
+            const getSchedules = await prisma.schedule.findMany({
+                where:{doctor_id : rest.doctor_id as any}
             })
             const schedulesNumber = getSchedules.length
             const currentDate = new Date();
@@ -20,8 +20,8 @@ const createSchedules = async (req: newSchedulesReq): Promise<ResponseSchedule> 
                     const weekdayName = weekDays[dayOfWeek % 7]  ;
                     if(weekdayName !== 'friday'){
                         const newScheduleData = { doctor_id:rest.doctor_id,date: newDateString,day: weekdayName,start_time, end_time,available_slots };
-                        schedule.push ( await prisma.Schedule.create({
-                            data: newScheduleData
+                        schedule.push ( await prisma.schedule.create({
+                            data: newScheduleData as any
                         }))
                     }
                     currentDate.setDate(currentDate.getDate() + 1);
@@ -38,7 +38,7 @@ const createSchedules = async (req: newSchedulesReq): Promise<ResponseSchedule> 
                 const LastSchedule= getSchedules[schedulesNumber - 1] 
                 currentDate.setDate(currentDate.getDate() + (schedulesNumber -1) );
                 var weekdayName = LastSchedule.day
-                var dayOfWeekNumber = weekDays.indexOf(weekdayName)
+                var dayOfWeekNumber = weekDays.indexOf(weekdayName as string) 
                 for(let i = 0;i<daysLoop;i++ ){
                     currentDate.setDate(currentDate.getDate() + 1);
                     newDateString = currentDate.toLocaleDateString();
@@ -46,8 +46,8 @@ const createSchedules = async (req: newSchedulesReq): Promise<ResponseSchedule> 
                     weekdayName = weekDays[dayOfWeekNumber % 7]  ;
                     if(weekdayName !== 'friday'){
                         const newScheduleData = { doctor_id:rest.doctor_id,date: newDateString,day: weekdayName,start_time, end_time,available_slots };
-                        schedule.push ( await prisma.Schedule.create({
-                            data: newScheduleData
+                        schedule.push ( await prisma.schedule.create({
+                            data: newScheduleData as any
                         }))
                     }
                 }
@@ -61,8 +61,8 @@ const createSchedules = async (req: newSchedulesReq): Promise<ResponseSchedule> 
 
 const getSchedules = async (_id: String): Promise<ResponseSchedule> => {
     try{
-        const getSchedules = await prisma.Schedule.findMany({
-            where:{doctor_id : _id}
+        const getSchedules: any = await prisma.schedule.findMany({
+            where:{doctor_id : _id as string}
         })
         return getSchedules
     }catch(err){

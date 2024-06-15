@@ -5,7 +5,7 @@ import { patientRes } from "./patient.interface"
 const getOnePatient = async(id:string): Promise<patientRes> =>{
     try {
         console.log(id)
-        const patient = await prisma.Patient.findFirst({
+        const patient: any = await prisma.patient.findFirst({
             where: {
                 id: id
             }
@@ -19,7 +19,7 @@ const getOnePatient = async(id:string): Promise<patientRes> =>{
 
 const getAllPatients = async(): Promise<patientRes[] | patientRes> =>{
     try {
-        const patients = await prisma.Patient.findMany()
+        const patients: any = await prisma.patient.findMany()
         return patients
     }catch(err){
         console.error('Error retrieving patient:', err);

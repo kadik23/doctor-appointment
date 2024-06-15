@@ -4,7 +4,7 @@ import { specialization } from "./specialization.interface";
 
 const getAllspecializations = async(): Promise<specialization[] | {error: string }> => {
     try {
-        const specializations = await prisma.Specialization.findMany(); 
+        const specializations = await prisma.specialization.findMany(); 
         return specializations
     } catch (e) {
         console.error('Error retrieving specializations:', e);
@@ -15,7 +15,7 @@ const getAllspecializations = async(): Promise<specialization[] | {error: string
 const getOnespecialization = async(Spcid: string) : Promise<specialization> => {
     try {
         const id = Spcid
-        const result = await prisma.Specialization.findUnique({
+        const result: any = await prisma.specialization.findUnique({
             where: {
                 id: id
             }

@@ -5,17 +5,17 @@ const createAppointment = async(patient: patientReq): Promise<appointmentRes> =>
     try{
         const { doctor_id,date,time, ...patientData } = patient
         const result = await prisma.patient.create({
-            data: patientData
+            data: patientData as any
         })
         if(result){
             const appointment = await prisma.appointment.create({
                 data: {
                     patient_id: result.id,
                     doctor_id: doctor_id,
-                    date: patient.date,
-                    time: patient.time,
+                    date: patient.date as string,
+                    time: patient.time as string,
                     number: "123",
-                }
+                } as any
             })
             const getSchedule = await prisma.schedule.findFirst({  
                 where: {
@@ -26,13 +26,13 @@ const createAppointment = async(patient: patientReq): Promise<appointmentRes> =>
             if(getSchedule){
                 const updatedSlots = getSchedule.available_slots.filter(slot => slot.start_at !== time);
                 console.log("sch id" + getSchedule.id)
-                const decreaseDate = await prisma.schedule.update({
+                const decreaseDate: any = await prisma.schedule.update({
                     data:{ available_slots:updatedSlots},
                     where: { id: getSchedule.id},
                     })
                 if(decreaseDate){
                     console.log(decreaseDate)
-                    return appointment
+                    return appointment as any
                 }else{
                     console.log(getSchedule)
                     return {error: 'something went wrong'}
@@ -51,7 +51,7 @@ const createAppointment = async(patient: patientReq): Promise<appointmentRes> =>
 
 const getAllAppointments = async(): Promise<appointmentRes> =>{
     try {
-    const appointments = await prisma.Appointment.findMany()
+    const appointments: any = await prisma.appointment.findMany()
     return appointments
     }catch(err){
         console.error('Error registering user:', err);
@@ -61,7 +61,7 @@ const getAllAppointments = async(): Promise<appointmentRes> =>{
 
 const getOneAppointment = async(id:string): Promise<appointmentRes> =>{
     try {
-        const appointment = await prisma.Appointment.findFirst({
+        const appointment: any = await prisma.appointment.findFirst({
             where: {
                 id: id
             }
@@ -75,7 +75,7 @@ const getOneAppointment = async(id:string): Promise<appointmentRes> =>{
 
 const deleteAppointment = async (id: string): Promise<any> => {
     try {
-        const result =  await prisma.Appointment.delete({
+        const result =  await prisma.appointment.delete({
             where: {
                 id: id
             }

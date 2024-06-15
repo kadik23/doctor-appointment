@@ -10,7 +10,7 @@ const loginUser = async (user: any): Promise<LoginResponse> => {
     const { email, password } = user;
 
     try {
-        const userDoc = await prisma.Doctor.findUnique({
+        const userDoc = await prisma.doctor.findUnique({
             where: { email },
         });
 
@@ -29,7 +29,7 @@ const loginUser = async (user: any): Promise<LoginResponse> => {
         },jwtSecret,{})
         
         return {token: token, user:{
-            email: userDoc.email,fullname: userDoc.fullname,phone:userDoc.phone,gender:userDoc.gender,biography:userDoc.biography,specializationIds:userDoc.specializationIds
+            email: userDoc.email,fullname: userDoc.fullname,phone:userDoc.phone,gender:userDoc.gender,biography:userDoc.biography,specializationIds:userDoc.specializationIDs
         }}
         } catch (error) {
             console.error(error); 
@@ -41,7 +41,7 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
     const { email, fullname, phone, gender, password, biography, specializationIds } = user;
     try {
         // Check if the user with the provided email already exists
-        const existingUser = await prisma.Doctor.findUnique({ where: { email } });
+        const existingUser = await prisma.doctor.findUnique({ where: { email } });
         if (existingUser) {
             return { error: 'Email already exists' };
         }
@@ -63,7 +63,7 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
         const updates = await Promise.all(
         specializationIds.map(async (specializationId: string | null) => {
             const specialization = await prisma.specialization.findUnique({
-            where: { id: specializationId },
+            where: { id: specializationId as string},
             });
             if (!specialization) {
             console.error(`Specialization with ID ${specializationId} not found`);
@@ -71,7 +71,7 @@ const registerUser = async (user: any): Promise<RegisterResponse> => {
             }
             const updatedDoctorIDs = [...specialization.doctorIDs, newUser.id]; // Assuming doctorIDs is a String[]
             return await prisma.specialization.update({
-            where: { id: specializationId },
+            where: { id: specializationId as string },
             data: {
                 doctorIDs: { set: updatedDoctorIDs }, 
             },

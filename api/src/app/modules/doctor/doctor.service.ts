@@ -26,10 +26,10 @@ const getAllDoctors = async (filters: DoctorFiltersData, options: DoctorOptions)
         //     }
         // }
         const whereCondition = Object.keys(andCondition).length > 0 ? { AND: andCondition } : {};
-        const doctors = await prisma.Doctor.findMany({
+        const doctors = await prisma.doctor.findMany({
             where: whereCondition
         });
-        const mappedResult: DoctorsRes = doctors.map((doctor: DoctorDoc) => ({
+        const mappedResult: any = doctors.map((doctor: any) => ({
             _id: doctor.id,
             email: doctor.email,
             fullname: doctor.fullname,
@@ -48,7 +48,7 @@ const getAllDoctors = async (filters: DoctorFiltersData, options: DoctorOptions)
 
 const getDoctor = async (id: string): Promise<DoctorRes> => {
     try {
-    const result = await prisma.Doctor.findUnique({
+    const result: any = await prisma.doctor.findUnique({
         where: {
             id: id
         }
@@ -62,7 +62,7 @@ const getDoctor = async (id: string): Promise<DoctorRes> => {
 
 const deleteDoctor = async (id: string): Promise<any> => {
     try {
-        const result =  await prisma.Doctor.delete({
+        const result =  await prisma.doctor.delete({
             where: {
                 id: id
             }
@@ -80,7 +80,7 @@ const updateDoctor = async (req: Request): Promise<DoctorRes> => {
         const requestBody = req.body;
 
 
-        const result = await prisma.Doctor.update({
+        const result: any = await prisma.doctor.update({
             where: { id },
             data: requestBody
         });

@@ -15,7 +15,7 @@ import axios from "axios";
 import AppLayout from './layouts/AppLayout'
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'http://localhost:3000/api/v1/auth';
+axios.defaults.baseURL = 'http://127.0.0.1:3000';
 
 function App() {
 

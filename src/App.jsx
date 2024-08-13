@@ -13,6 +13,7 @@ import OneDoctorOverview from './pages/OneDoctorOverview'
 import BookAppointment from './pages/BookAppointment'
 import axios from "axios";
 import AppLayout from './layouts/AppLayout'
+import ContactUs from './pages/ContactUs'
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'https://doctor-appointment-6-rupv.onrender.com/api/v1/auth';
@@ -31,6 +32,7 @@ function App() {
             <Route path="our_doctors" element={<OurDoctors />} /> 
             <Route path="one_doctor_overview/:id" element={<OneDoctorOverview />} /> 
             <Route path="booking" element={<BookAppointment />} /> 
+            <Route path="contact_us" element={<ContactUs />} /> 
           </Route> 
           <Route path='/' element={(<Doctor />)}>
             <Route path="my_appointments" element={<MyAppointment />} /> 

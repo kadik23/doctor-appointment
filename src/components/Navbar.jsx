@@ -39,7 +39,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="w-full p-5 bg-white shadow-md flex justify-between items-center">
+        <nav className="w-full p-5 bg-white shadow-md md:shadow-none flex justify-between items-center fixed top-0 z-50">
             <NavLink to='/home' className='flex items-center gap-2'>
                 <img src={Logo} alt="" className='scale-75' />
                 <span className='text-regal-green font-semibold'>Docapp</span>

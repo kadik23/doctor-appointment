@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 function SpecializationCard({ specializationData }) {
   return (
-    <div className='flex flex-col gap-5 items-start hoverBackground hover:bg-white hover:shadow-lg rounded-xl p-8 w-1/4 my-3'>
+    <div className='flex flex-col gap-5 items-start hoverBackground hover:bg-white hover:shadow-lg rounded-xl p-8 md:w-1/4 my-3'>
       <div>
         <div className='rounded-md flex items-center justify-center gap-3'>
           <Icon

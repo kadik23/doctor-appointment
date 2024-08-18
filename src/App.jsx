@@ -16,7 +16,7 @@ import AppLayout from './layouts/AppLayout'
 import ContactUs from './pages/ContactUs'
 
 axios.defaults.withCredentials = true;
-axios.defaults.baseURL = 'https://doctor-appointment-6-rupv.onrender.com/api/v1/auth';
+axios.defaults.baseURL = 'http://127.0.0.1:3000/api/v1/auth';
 
 function App() {
 

@@ -8,7 +8,7 @@ const app: Express = express();
 const port = process.env.PORT || 3000;
 const corsOptions = {
   credentials: true, 
-  origin: 'https://doctor-appointment-5-btf0.onrender.com', 
+  origin: 'http://localhost:5173', 
 }
 // hq3tc2xMOanMr8eP
 

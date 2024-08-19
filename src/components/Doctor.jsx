@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 function Doctor({ doctorData }) {
   return (
-    <NavLink to='/one_doctor_overview' className='border border-gray-200 flex flex-col items-center gap-3 mx-5 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-300  cursor-pointer'>
+    <NavLink to={`/one_doctor_overview/${doctorData._id}`} className='border border-gray-200 flex flex-col items-center gap-3 mx-5 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-300  cursor-pointer'>
         <img src='' alt="Doctor Image" className='w-32 h-40'/>
         <div className='flex flex-col px-5 bg-white'>
             <h1 className='font-semibold text-lg'>Dr.{doctorData.fullname}</h1>

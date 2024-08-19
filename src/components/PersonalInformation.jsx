@@ -35,9 +35,9 @@ function PersonalInformation() {
     return (
     <div>
         <Steps step="2" />
-        <div className=' h-screen gap-10 flex flex-col justify-center items-center duration-500'>
+        <div className=' md:h-screen gap-10 flex flex-col justify-center items-center duration-500'>
             <h1 className='text-3xl font-bold text-center  '>Enter Your Personal Information</h1>
-            <div className='flex gap-10'>
+            <div className='flex flex-col md:flex-row gap-3 md:gap-10'>
                 <div className='gap-3 flex flex-col'>
                     <div className='flex items-center bg-[#F0F0F0] rounded-l-3xl pl-5 rounded-r-3xl'>
                         <Icon icon="ph:user-fill" width="18" height="18" className='text-[#c9c9c9] '/>
@@ -86,7 +86,7 @@ function PersonalInformation() {
                     </div>
                 </div>
             </div>
-            <div className='flex justify-end items-center mr-52 my-10 w-full'>
+            <div className='flex justify-end items-center md:mr-52 my-10 w-full'>
                 <button onClick={previousStep} className='  py-1 px-5 rounded-2xl text-regal-green border border-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>PREVIOUS</button>
                 {fullname && age && phone 
                     ? <button onClick={sendAppointment} className='  py-1 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 mr-24'>NEXT</button>

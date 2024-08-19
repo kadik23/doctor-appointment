@@ -68,11 +68,33 @@ function Navbar() {
                 transition={{ duration: 0.5, ease: "easeInOut" }}
                 className={`w-full md:hidden overflow-hidden ${isOpen ? 'block' : 'hidden'}`}
             >
-                <div className="flex flex-col gap-3 mt-4">
+                <div className="flex flex-col gap-3 my-4">
                     <NavLink to='/home' className='block py-2 px-4 text-center hover:text-regal-green'>Home</NavLink>
                     <NavLink to='/our_doctors' className='block py-2 px-4 text-center hover:text-regal-green'>Our Doctors</NavLink>
                     <NavLink to='/contact_us' className='block py-2 px-4 text-center hover:text-regal-green'>Contact Us</NavLink>
                 </div>
+                {user == null ? (
+                <div className=" flex flex-col items-center gap-3 font-medium">
+                    <NavLink to='/sign_in' className='hover:text-regal-green'>Log in</NavLink>
+                    <NavLink to='/sign_up' className='bg-regal-green text-white rounded-xl px-4 py-0.5 hover:bg-opacity-80 active:scale-105 transition-all duration-200'>Sign up</NavLink>
+                </div>
+            ) : (
+                <details className="relative md:flex items-center gap-3 font-medium">
+                    <summary className="m-1 cursor-pointer" style={{ listStyle: 'none' }}>
+                        <img src="" alt="Profile" className="w-8 h-8 rounded-full border-2 border-gray-400" />
+                    </summary>
+                    <motion.ul
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: isDropdownOpen ? 'auto' : 0, opacity: isDropdownOpen ? 1 : 0 }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        className="p-2 shadow-md bg-white z-10 rounded-lg absolute top-10 right-0"
+                        style={{ overflow: 'hidden' }}
+                    >
+                        <li className="mb-2"><NavLink to='/dashboard' className="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-md transition-colors duration-300">Dashboard</NavLink></li>
+                        <li><button onClick={handleLogout} className="block px-4 py-2 text-red-600 hover:bg-red-100 rounded-md transition-colors duration-300 hover:text-regal-green">Logout</button></li>
+                    </motion.ul>
+                </details>
+            )}
             </motion.div>
 
             {/* User profile and logout button */}

@@ -12,7 +12,7 @@ const Steps = () => {
   
   return (
     <div>
-      <div className='flex items-center mt-20 mb-10 ml-16'>
+      <div className='flex flex-col md:flex-row items-center mt-20 mb-10 md:ml-16'>
         <div className='flex items-center'>
         {StepNbr === "1"
           ? <span className='rounded-full w-10 h-10 p-5 bg-regal-green text-white flex items-center justify-center mx-3'>1</span>
@@ -21,8 +21,8 @@ const Steps = () => {
           <span className='mr-2 text-nowrap'>Choose Specialization</span>
         </div>
         {StepNbr === "1"
-          ? <hr className='border-2 rounded-md border-gray-300 w-44'/>
-          : <hr className='border-2 rounded-md border-regal-green w-44'/>
+          ? <hr className='border-2 rounded-md border-gray-300 h-44 md:w-44 md:h-auto'/>
+          : <hr className='border-2 rounded-md border-regal-green h-44 md:w-44 md:h-auto'/>
         }
         <div className='flex items-center'>
         {StepNbr === "1"
@@ -37,8 +37,8 @@ const Steps = () => {
         }
         </div>
         {(StepNbr === "2" || StepNbr === "1")
-          ? <hr className='border-2 rounded-md border-gray-300 w-44'/>
-          :  <hr className='border-2 rounded-md border-regal-green w-44'/>
+          ? <hr className='border-2 rounded-md border-gray-300 h-44 md:w-44 md:h-auto'/>
+          :  <hr className='border-2 rounded-md border-regal-green h-44 md:w-44 md:h-auto'/>
         }
         <div className='flex items-center'>
             {StepNbr === "3"

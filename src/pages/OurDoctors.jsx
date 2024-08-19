@@ -65,8 +65,8 @@ function OurDoctors() {
             <p className="text-white">dolorem ipsum quia dolor sit amet.</p>
         </div>
     </div>
-    <div className="flex items-start mx-5">
-        <div className="p-10 flex flex-col items-start gap-5 bg-white w-1/4 rounded-2xl m-10">
+    <div className="w-full flex flex-col md:flex-row items-start md:mx-5">
+        <div className="p-10 flex flex-col items-start gap-5 bg-white w-full md:w-1/4 rounded-2xl md:m-10">
             <h1 className="text-xl font-semibold">Doctor Filter</h1>
             <div className='flex items-center bg-[#F0F0F0] rounded-l-3xl pl-5 rounded-r-3xl '>
                     <input 
@@ -125,9 +125,9 @@ function OurDoctors() {
             </div>
         </div>
         {doctors && doctors.length > 0 && filteredDoctors ? (
-        <div className="flex flex-col gap-10 my-5 mx-6">
+        <div className="flex flex-col w-full gap-10 my-5 mx-6">
             {filteredDoctors.map(doctor => (
-                <div className="flex justify-between p-3 my-5 shadow-sm rounded-xl border border-gray-200">
+                <div className="flex flex-col md:flex-row justify-between p-3 my-5 shadow-sm rounded-xl border border-gray-200">
                     <div className="flex">
                         <div className="m-5">
                             <img src="Profile" alt="" className="w-32 h-32 rounded-full"/>
@@ -152,14 +152,14 @@ function OurDoctors() {
                         </div>
                     </div>                
                 </div>
-                    ))}
-            </div>
-            ) : (
-                <p className="mt-10 mx-auto">Loading...</p>
-            )}
+            ))}
         </div>
+        ) : (
+            <p className="mt-10 mx-auto">Loading...</p>
+        )}
+    </div>
     </>
-  )
+)
 }
 
 export default OurDoctors

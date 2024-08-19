@@ -21,23 +21,23 @@ function SelectSpecialization() {
 
     return (
     <div >
-        <div className='flex items-center mt-20 mb-10 ml-20'>
+        <div className='flex flex-col md:flex-row items-center mt-20 mb-10 md:ml-20'>
             <div className='flex items-center'>
                 <span className='rounded-full w-10 h-10 p-5 bg-regal-green text-white flex items-center justify-center mx-3'>1</span>
                 <span className='mr-2'>Choose Specialization</span>
             </div>
-            <hr className='border-2 bg-gray-300 w-32'/>
-            <div className='flex items-center'>
+            <hr className='border-2 bg-gray-300 h-32 md:w-32 md:h-auto'/>
+            <div className='flex items-center mt-4 md:mt-0'>
                 <span className='rounded-full w-10 h-10 p-5 bg-gray-300 text-white flex items-center justify-center mx-3'>2</span>
-                <span  className='mr-2 text-gray-300'>Select Appointment</span>
+                <span className='mr-2 text-gray-300'>Select Appointment</span>
             </div>
-            <hr className='border-2 border-bg-gray-300 w-32'/>
-            <div className='flex items-center'>
+            <hr className='border-2 bg-gray-300 md:w-32 h-32 md:h-auto'/>
+            <div className='flex items-center mt-4 md:mt-0'>
                 <span className='rounded-full w-10 h-10 p-5 bg-gray-300 text-white flex items-center justify-center mx-3'>3</span>
-                <span  className='mr-2 text-gray-300'>Patient Information</span>
+                <span className='mr-2 text-gray-300'>Patient Information</span>
             </div>
-            <hr className='border-2 bg-gray-300 w-32'/>
         </div>
+
         <h1 className='text-center text-2xl font-semibold '>Choose Specialization</h1>
         <hr className=' my-2 w-[10%] border-2 rounded-xl  border-regal-green mx-auto mb-5'/>
         <div className='mb-10'>

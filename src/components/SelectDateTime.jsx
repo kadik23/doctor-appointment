@@ -30,8 +30,8 @@ function SelectDateTime() {
     return (
     <div>
         <Steps step="2" />
-        <div className='flex bg-gray-50 p-5 mx-24 my-10 rounded-xl'>
-            <div className='flex flex-col gap-5 rounded-lg p-5 w-1/3'>
+        <div className='flex flex-col md:flex-row bg-gray-50 p-5 md:mx-24 my-10 rounded-xl'>
+            <div className='flex flex-col gap-5 rounded-lg p-5 w-full md:w-1/3'>
                 <span>Would you like to schedule an Appointment? Pick a Date & Time</span>
                 <hr />
                 <div className='flex gap-2 items-center'>
@@ -43,7 +43,7 @@ function SelectDateTime() {
                     <span>15 Min To 45 Min</span>
                 </div>
             </div>
-            <div className='flex flex-col gap-5 rounded-lg py-5 px-3 w-1/3'>
+            <div className='flex flex-col gap-5 rounded-lg py-5 px-3 w-full md:w-1/3'>
             {selectedDate && selectedAppointment.date
                 ? <h1>Selected Day: {selectedAppointment.date}</h1>
                 : <h1>Pick a Day</h1>
@@ -72,7 +72,7 @@ function SelectDateTime() {
                 })}
                 </div>
             </div>
-            <div className='flex flex-col gap-5 rounded-lg p-5 w-1/3'>
+            <div className='flex flex-col gap-5 rounded-lg p-5 w-full md:w-1/3'>
             {selectedDate && selectedAppointment.time
                 ? <h1>Selected Time: {selectedAppointment.time}</h1>
                 : <h1>Pick a Time</h1>

@@ -35,14 +35,14 @@ function SignIn() {
     }
 
   return (
-    <div className='w-screen h-screen flex'>
-        <div className='h-screen bg-regal-green w-1/2 gap-3  rounded-br-full flex flex-col items-center justify-center text-white'>
+    <div className='w-screen md:h-screen flex flex-col md:flex-row'>
+        <div className='h-screen bg-regal-green w-full order-2 md:order-1 md:w-1/2 gap-3  md:rounded-br-full flex flex-col items-center justify-center text-white'>
             <h1 className='text-2xl font-bold'>Now here?</h1>
             <p className='text-center'>If you're a qualified doctor, we highly encourage you to sign up for our program today. Don't miss out! <br /> to sign in to access your account. Thank you. </p>
             <NavLink to='/sign_up' className='text-white border-2 border-white py-1 px-5 rounded-2xl hover:bg-white hover:text-regal-green  transition-all duration-200 mx-3'>SIGN UP</NavLink>
             <img src={SignInImg} alt="" className='h-56 w-56 rounded-full'/>
         </div>
-        <form onSubmit={handleLoginSubmit} className='w-1/2 h-screen gap-10 flex flex-col justify-center items-center relative'>
+        <form onSubmit={handleLoginSubmit} className='md:w-1/2 w-full order-1 md:order-2 h-screen gap-10 flex flex-col justify-center items-center relative'>
                 <NavLink to='/home'className='flex items-center gap-2 p-2 absolute top-16'>
                     <img src={Logo} alt="" className='scale-125   '/>
                     <span className='text-regal-green text-xl font-semibold'>Docapp</span>
@@ -70,7 +70,7 @@ function SignIn() {
                     />
                 </div>
             </div>
-            <button type='submit' className='  py-2 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>SIGN IN</button>
+            <button type='submit' className='w-80 md:w-fit py-2 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 md:mx-3 hover:opacity-90 active:scale-105 '>SIGN IN</button>
         </form>
     </div>
   )

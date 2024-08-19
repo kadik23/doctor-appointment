@@ -48,15 +48,15 @@ function SignUp() {
     }
 
   return (
-    <div className='w-screen h-screen flex'>
-       
-        <div  className='w-1/2 relative h-screen gap-10 flex flex-col justify-center items-center'>
-                <NavLink to='/home'className='flex items-center gap-2 p-2 absolute top-16'>
-                    <img src={Logo} alt="" className='scale-125   '/>
-                    <span className='text-regal-green text-xl font-semibold'>Docapp</span>
-                </NavLink>
+    <div className='w-screen md:h-screen flex flex-col md:flex-row'>
+    
+        <div  className='md:w-1/2 w-full relative h-screen gap-10 flex flex-col justify-center items-center'>
+            <NavLink to='/home'className='flex items-center gap-2 p-2 md:absolute md:top-16'>
+                <img src={Logo} alt="" className='scale-125   '/>
+                <span className='text-regal-green text-xl font-semibold'>Docapp</span>
+            </NavLink>
             <h1 className='text-3xl font-bold text-center  '>Sign up</h1>
-            <div className='flex gap-10'>
+            <div className='flex flex-wrap justify-center gap-3 md:gap-10'>
                 <div className='gap-3 flex flex-col'>
                     <div className='flex items-center bg-[#F0F0F0] rounded-l-3xl pl-5 rounded-r-3xl'>
                         <Icon icon="ph:user-fill" width="18" height="18" className='text-[#c9c9c9] '/>
@@ -88,9 +88,7 @@ function SignUp() {
                             onChange={ev => setEmail(ev.target.value)}
                         />
                     </div>
-
                 </div>
-            
                 <div className='gap-3 flex flex-col'>
                     <div className='flex items-center bg-[#F0F0F0] rounded-l-3xl pl-5 rounded-r-3xl'>
                         <Icon icon="foundation:torsos-female-male" width="18" height="18" className='text-[#c9c9c9] '/>
@@ -128,9 +126,9 @@ function SignUp() {
                     </div>
                 </div>
             </div>
-            <button type='button' onClick={registerUser} className='  py-2 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>SIGN UP</button>
+            <button type='button' onClick={registerUser} className='w-72 md:w-auto  py-2 px-5 rounded-2xl text-white bg-regal-green transition-all duration-200 mx-3 hover:opacity-90 active:scale-105 '>SIGN UP</button>
         </div>
-        <div className='h-screen bg-regal-green w-1/2 gap-3  rounded-bl-full flex flex-col items-center justify-center text-white'>
+        <div className='md:h-screen bg-regal-green md:w-1/2 gap-3 w-full md:rounded-bl-full py-4 flex flex-col items-center justify-center text-white'>
             <h1 className='text-2xl font-bold'>One of us?</h1>
             <p className='text-center'>If you're a qualified doctor, we highly encourage you to sign <br />  up for our program today. Don't miss out!</p>
             <NavLink to='/sign_in' className='text-white border-2 border-white py-1 px-5 rounded-2xl hover:bg-white hover:text-regal-green  transition-all duration-200 mx-3'>SIGN IN</NavLink>

@@ -24,12 +24,9 @@ function BookAppointment() {
         
     return (
         <>
-            <div>
-                {steps[step-1].content}
-            </div>
+            <div>{steps[step-1].content}</div>
         </>
-
     )
 }
 
-export default     BookAppointment
+export default BookAppointment
